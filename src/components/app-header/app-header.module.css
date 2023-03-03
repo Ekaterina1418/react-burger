@@ -1,0 +1,35 @@
+.header {
+  background: var(--background);
+}
+
+.header_wrapper {
+  display: flex;
+  align-items: center;
+  composes: pb-4 pt-4 from global;
+  justify-content: space-between;
+}
+.button {
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  display: flex;
+  font-family: 'JetBrainsMono', Arial, sans-serif;
+  composes: text text_type_main-medium from global;
+}
+.header_button_order {
+  composes: pr-5 pb-5 pt-5 from global;
+  composes: button;
+}
+.header_button_order svg {
+  padding-right: 8px;
+}
+.header_button_account {
+  composes: button;
+  composes: pb-4 pt-4 from global;
+  padding-right: 20px;
+  padding-left: 23px;
+}
+.header_button_account svg {
+  padding-right: 11px;
+}
