@@ -40,7 +40,7 @@
   height: 120px;
 }
 .burger_ingredient_scroll {
-  height: 690px;
+  height: 660px;
   overflow-y: scroll;
 }
 .burger_ingredient_scroll::-webkit-scrollbar {

@@ -6,11 +6,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import Categoryingredients from './category-ingredients/category-ingredients'
 import PropTypes from 'prop-types'
-const burgerIngredients = PropTypes.shape({
-  image: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
- 
-})
+import { DATA_TYPES } from '../../utils/types'
 
 const BurgerIngredients = ({ data }) => {
   const ingredients = ['Булки', 'Соусы', 'Начинки']
@@ -37,10 +33,10 @@ const BurgerIngredients = ({ data }) => {
                       src={item.image}
                       alt={item.name}
                     />
-                    <Counter count="1" size="default" extraClass="m-1" />{' '}
+                    <Counter count="1" size="default" extraClass="m-1" />
                     <p className={styles.burger_component_currency}>
                       <CurrencyIcon type="primary" />
-                      <span>20</span>{' '}
+                      <span>20</span>
                     </p>
                     <p className={styles.burger_component_name}>{item.name}</p>
                   </div>
@@ -62,10 +58,10 @@ const BurgerIngredients = ({ data }) => {
                       src={item.image}
                       alt={item.name}
                     />
-                    <Counter count="1" size="default" extraClass="m-1" />{' '}
+                    <Counter count="1" size="default" extraClass="m-1" />
                     <p className={styles.burger_component_currency}>
                       <CurrencyIcon type="primary" />
-                      <span>20</span>{' '}
+                      <span>20</span>
                     </p>
                     <p className={styles.burger_component_name}>{item.name}</p>
                   </div>
@@ -79,6 +75,6 @@ const BurgerIngredients = ({ data }) => {
   )
 }
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(burgerIngredients).isRequired,
+  data: PropTypes.arrayOf(DATA_TYPES),
 }
 export default BurgerIngredients

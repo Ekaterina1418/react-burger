@@ -8,28 +8,32 @@
   composes: pb-4 pt-4 from global;
   justify-content: space-between;
 }
-.button {
+.color_active {
+  color: #F2F2F3;
+}
+.link {
   border: none;
-  font: inherit;
-  color: inherit;
   background-color: transparent;
   display: flex;
+  align-items: center;
   font-family: 'JetBrainsMono', Arial, sans-serif;
   composes: text text_type_main-medium from global;
 }
-.header_button_order {
+.header_link_order {
   composes: pr-5 pb-5 pt-5 from global;
-  composes: button;
+  composes: link;
+  text-decoration: none;
 }
-.header_button_order svg {
+.header_link_order svg {
   padding-right: 8px;
 }
-.header_button_account {
-  composes: button;
+.header_link_account {
+  composes: link;
   composes: pb-4 pt-4 from global;
   padding-right: 20px;
   padding-left: 23px;
+  text-decoration: none;
 }
-.header_button_account svg {
+.header_link_account svg {
   padding-right: 11px;
 }

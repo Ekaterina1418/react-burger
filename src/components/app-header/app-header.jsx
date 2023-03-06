@@ -14,22 +14,31 @@ const AppHeader = () => {
       `}
       >
         <div style={{ display: 'flex' }}>
-          <button className={styles.header_button_order}>
+          <a
+            href="#"
+            className={`${styles.header_link_order} ${styles.color_active}`}
+          >
             <BurgerIcon type="primary" />
             <span>Конструктор</span>
-          </button>
-          <button className={styles.header_button_order}>
-            <ListIcon type="primary" />
+          </a>
+          <a
+            href="#"
+            className={`${styles.header_link_order} text_color_inactive`}
+          >
+            <ListIcon type="secondary" />
             <span>Лента заказов</span>
-          </button>
+          </a>
         </div>
         <div>
           <Logo />
         </div>
-        <button className={styles.header_button_account}>
-          <ProfileIcon type="primary" />
+        <a
+          href="#"
+          className={`${styles.header_link_account} text_color_inactive`}
+        >
+          <ProfileIcon type="secondary" />
           <span>Личный кабинет</span>
-        </button>
+        </a>
       </div>
     </header>
   )

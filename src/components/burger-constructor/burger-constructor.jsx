@@ -7,14 +7,13 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import PropTypes from 'prop-types'
 import styles from './burger-constructor.module.css'
-import img from '../../images/bun-02.png'
-const burgerConstructor = PropTypes.shape({
-  image: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-})
+import { DATA_TYPES } from '../../utils/types'
 
 const BurgerConstructor = ({ data }) => {
+  const searchElement = data.find((_, index) => {
+    return index === 0
+  })
+
   return (
     <div className={styles.burger_constructor_wrapper}>
       <div className={styles.burger_constructor_lists}>
@@ -22,9 +21,9 @@ const BurgerConstructor = ({ data }) => {
           <ConstructorElement
             type="top"
             isLocked={true}
-            text="Краторная булка N-200i (верх)"
-            price={200}
-            thumbnail={img}
+            text={searchElement.name}
+            price={searchElement.price}
+            thumbnail={searchElement.image}
           />
         </div>
         <div className={styles.burger_constructor_scroll}>
@@ -43,9 +42,9 @@ const BurgerConstructor = ({ data }) => {
         <ConstructorElement
           type="bottom"
           isLocked={true}
-          text="Краторная булка N-200i (низ)"
-          price={200}
-          thumbnail={img}
+          text={searchElement.name}
+          price={searchElement.price}
+          thumbnail={searchElement.image}
           extraClass={styles.burger_constructor_bottom}
         />
       </div>
@@ -61,7 +60,7 @@ const BurgerConstructor = ({ data }) => {
   )
 }
 BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(burgerConstructor).isRequired,
+  data: PropTypes.arrayOf(DATA_TYPES),
 }
 
 export default BurgerConstructor
