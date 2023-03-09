@@ -12,33 +12,18 @@
   font-family: 'JetBrainsMono', Arial, sans-serif;
   padding-bottom: 24px;
 }
-.burger_ingredient_container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-}
 
 .burger_ingredient {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 0 32px;
 }
 
 .burger_ingredient_pb {
   padding-bottom: 40px;
 }
-.burger_ingredient_rolls:first-child {
-  margin-right: 24px;
-}
-.burger_ingredient_sauce:nth-child(odd) {
-  margin-right: 56px;
-}
 
-.burger_component_img {
-  width: 240px;
-  height: 120px;
-}
+
+
 .burger_ingredient_scroll {
   height: 660px;
   overflow-y: scroll;
@@ -51,16 +36,4 @@
 }
 .burger_ingredient_scroll::-webkit-scrollbar-thumb {
   background: #8585ad;
-}
-
-.burger_component_currency {
-  composes: mb-2 mt-2 from text text_type_digits-medium from global;
-  text-align: center;
-}
-.burger_component_currency svg {
-  margin-right: 9px;
-}
-.burger_component_name {
-  composes: text text_type_main-small from global;
-  text-align: center;
 }

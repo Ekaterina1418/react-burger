@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   ConstructorElement,
   DragIcon,
@@ -7,9 +7,11 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import PropTypes from 'prop-types'
 import styles from './burger-constructor.module.css'
+import Modal from '../modal/modal'
 import { DATA_TYPES } from '../../utils/types'
-
+import OrderDetails from '../order-details/order-details'
 const BurgerConstructor = ({ data }) => {
+  const [openModal, setOpenModal] = useState(false)
   const searchElement = data.find((_, index) => {
     return index === 0
   })
@@ -52,9 +54,23 @@ const BurgerConstructor = ({ data }) => {
         <p className="text text_type_main-large">
           610 <CurrencyIcon type="primary" />
         </p>
-        <Button htmlType="button" type="primary" size="large">
+        <Button
+          onClick={() => setOpenModal(true)}
+          htmlType="button"
+          type="primary"
+          size="large"
+        >
           Оформить заказ
         </Button>
+        {openModal && (
+          <Modal
+            open={openModal}
+            onClose={() => setOpenModal(false)}
+            closeOverlay={() => setOpenModal(false)}
+          >
+            <OrderDetails />
+          </Modal>
+        )}
       </div>
     </div>
   )

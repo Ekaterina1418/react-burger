@@ -1,0 +1,19 @@
+.burger_checkout_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 80px 60px 60px 60px;
+}
+.order_number {
+    padding-bottom: 32px;
+}
+.order_text {
+    padding-bottom: 60px;
+}
+.order_img {
+    padding-bottom: 60px;
+}
+.order_status {
+    padding-bottom: 8px;
+}

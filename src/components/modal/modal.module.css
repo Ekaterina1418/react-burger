@@ -1,0 +1,25 @@
+.modal_wrapper {
+  background: #1c1c21;
+  max-width: 720px;
+  width: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  border-radius: 40px;
+  padding: 40px 40px 60px 40px;
+}
+.modal_basic {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal_title {
+  composes: text text_type_main-large from global;
+}
+.modal_content {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
