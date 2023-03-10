@@ -1,7 +1,6 @@
 import React from 'react'
 import styles from './ingredient-item.module.css'
 import PropTypes from 'prop-types'
-import { DATA_TYPES } from '../../../utils/types'
 import {
   Counter,
   CurrencyIcon,
@@ -27,6 +26,6 @@ const IngredientItem = ({ selectIng, ingredient }) => {
   )
 }
 IngredientItem.propTypes = {
-  ingredient: PropTypes.arrayOf(DATA_TYPES),
+  ingredient: PropTypes.object,
 }
 export default IngredientItem

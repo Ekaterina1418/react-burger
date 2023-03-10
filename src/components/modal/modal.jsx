@@ -9,7 +9,7 @@ const Modal = ({ children, onClose, title, closeOverlay }) => {
   const [close, setClose] = useState(true)
   const closeModal = (e) => {
     if (e.key === 'Escape') {
-      setClose(false)
+     setClose(false)
     }
   }
   useEffect(() => {

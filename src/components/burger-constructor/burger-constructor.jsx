@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import {
   ConstructorElement,
   DragIcon,
@@ -12,9 +12,12 @@ import { DATA_TYPES } from '../../utils/types'
 import OrderDetails from '../order-details/order-details'
 const BurgerConstructor = ({ data }) => {
   const [openModal, setOpenModal] = useState(false)
-  const searchElement = data.find((_, index) => {
-    return index === 0
-  })
+
+  const searchElement = useMemo(() => {
+    return data.find((_, index) => {
+      return index === 0
+    })
+  }, [])
 
   return (
     <div className={styles.burger_constructor_wrapper}>
@@ -30,7 +33,7 @@ const BurgerConstructor = ({ data }) => {
         </div>
         <div className={styles.burger_constructor_scroll}>
           {data.map((item) => (
-            <div className={styles.burger_constructor_item}>
+            <div className={styles.burger_constructor_item} key={item._id}>
               <DragIcon />
 
               <ConstructorElement
@@ -64,7 +67,6 @@ const BurgerConstructor = ({ data }) => {
         </Button>
         {openModal && (
           <Modal
-            open={openModal}
             onClose={() => setOpenModal(false)}
             closeOverlay={() => setOpenModal(false)}
           >

@@ -24,7 +24,7 @@ const BurgerIngredients = ({ data }) => {
               if (item.type === 'bun') {
                 return (
                   <IngredientItem
-                    key={item.id}
+                    key={item._id}
                     ingredient={item}
                     selectIng={setCurrentIngredient}
                   />
@@ -32,14 +32,27 @@ const BurgerIngredients = ({ data }) => {
               }
             })}
           </div>
-
           <h2 className={styles.burger_ingredient_name}>Соусы</h2>
           <div className={styles.burger_ingredient}>
             {data.map((item) => {
               if (item.type === 'sauce') {
                 return (
                   <IngredientItem
-                    key={item.id}
+                    key={item._id}
+                    ingredient={item}
+                    selectIng={setCurrentIngredient}
+                  />
+                )
+              }
+            })}
+          </div>
+          <h2 className={styles.burger_ingredient_name}>Начинки</h2>
+          <div className={styles.burger_ingredient}>
+            {data.map((item) => {
+              if (item.type === 'main') {
+                return (
+                  <IngredientItem
+                    key={item._id}
                     ingredient={item}
                     selectIng={setCurrentIngredient}
                   />

@@ -11,7 +11,6 @@ const OrderDetails = () => {
       <p className="text text_type_main-default text_color_inactive">
         Дождитесь готовности на орбитальной станции
       </p>
-      <div></div>
     </div>
   )
 }

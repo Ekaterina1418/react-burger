@@ -3,18 +3,15 @@ import '../App.css'
 import AppHeader from './app-header/app-header'
 import BurgerConstructor from './burger-constructor/burger-constructor'
 import BurgerIngredients from './burger-ingredients/burger-ingredients'
-
+import { URL } from '../utils/data'
 function App() {
   const [loading, setLoading] = useState(false)
-  const [ingredients, setIngredients] = useState([])
+  const [ingredients, setIngredients] = useState(null)
   const [error, setError] = useState(null)
-
-
-  const url = 'https://norma.nomoreparties.space/api/ingredients'
 
   useEffect(() => {
     setLoading(true)
-    fetch(url)
+    fetch(URL)
       .then((res) => {
         if (!res.ok) {
           throw Error('Не удалось получить данные')
@@ -31,15 +28,18 @@ function App() {
   return (
     <>
       <AppHeader />
-      <div className="main_container wrapper">
-        {loading && <div>идёт загрузка</div>}
-        {!loading && error && <div>{error}</div>}
-        {!loading && ingredients.length > 0 && (
-          <>
-            <BurgerIngredients data={ingredients} />
-            <BurgerConstructor data={ingredients} />
-          </>
-        )}
+
+      <div className="wrapper">
+        <div className="main_container">
+          {loading && <div>идёт загрузка</div>}
+          {!loading && error && <div>{error}</div>}
+          {!loading && ingredients !== null && (
+            <>
+              <BurgerIngredients data={ingredients} />
+              <BurgerConstructor data={ingredients} />
+            </>
+          )}
+        </div>
       </div>
     </>
   )
