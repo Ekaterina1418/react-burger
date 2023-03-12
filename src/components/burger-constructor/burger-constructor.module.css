@@ -1,0 +1,47 @@
+.burger_constructor_wrapper {
+  padding: 0 16px;
+}
+
+.burger_constructor_lists {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  padding-top: 100px;
+}
+
+.burger_constructor_scroll {
+  height: 440px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.burger_constructor_bottom {
+  margin-bottom: 60px;
+}
+.burger_constructor_scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.burger_constructor_scroll::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+.burger_constructor_scroll::-webkit-scrollbar-thumb {
+  background: #8585ad;
+}
+
+.burger_constructor_sum {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.burger_constructor_sum p {
+  margin-right: 41.5px;
+}
+
+.burger_constructor_item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

@@ -1,0 +1,39 @@
+.burger_ingredients_wrapper {
+  padding-top: 40px;
+}
+
+.burger_ingredients_title {
+  font-family: 'JetBrainsMono', Arial, sans-serif;
+  font-weight: 700;
+  composes: text text_type_main-large pb-5 from global;
+}
+.burger_ingredient_name {
+  composes: text text_type_main-medium from global;
+  font-family: 'JetBrainsMono', Arial, sans-serif;
+  padding-bottom: 24px;
+}
+
+.burger_ingredient {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.burger_ingredient_pb {
+  padding-bottom: 40px;
+}
+
+
+
+.burger_ingredient_scroll {
+  height: 660px;
+  overflow-y: scroll;
+}
+.burger_ingredient_scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.burger_ingredient_scroll::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+.burger_ingredient_scroll::-webkit-scrollbar-thumb {
+  background: #8585ad;
+}
