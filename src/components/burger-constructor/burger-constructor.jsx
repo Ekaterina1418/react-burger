@@ -16,32 +16,35 @@ import {
   addToCart,
   sortingIngredient,
 } from '../../features/cart/cartSlice'
-import { createOrder, resetOrder } from '../../features/order/orderSlice'
+import { resetOrder } from '../../features/order/orderSlice'
 import BurgerConstructorItem from './burger-constructor-item'
 const BurgerConstructor = () => {
+  const [openModal, setOpenModal] = useState(false)
+  const [disable, setDisable] = useState(false)
   const bun = useSelector((state) => state.cart.bun)
   const ingredient = useSelector((state) => state.cart.ingredient)
-  const order = useSelector((store) => store.orderes.order)
+
   const dispatch = useDispatch()
 
   const [, dropRef] = useDrop({
     accept: 'ingredient',
     drop(itemId) {
+      setDisable(!disable)
       dispatch(addToCart(itemId))
     },
   })
-
-  const orderClick = () => {
-    if (bun !== null) {
-      let order = { ingredients: [bun._id, ...ingredient, bun._id] }
-      dispatch(createOrder(order))
-    }
-  }
 
   const handleMoveItem = ({ toIndex: hoverIndex, fromIndex: dragIndex }) => {
     dispatch(sortingIngredient({ toIndex: hoverIndex, fromIndex: dragIndex }))
   }
 
+  const orderClick = () => {
+    setOpenModal(!openModal)
+  }
+  const closeModal = () => {
+    dispatch(resetOrder())
+    setOpenModal(!openModal)
+  }
   const total = useMemo(() => {
     const amountIngredients = ingredient.reduce((acc, item) => {
       acc += item.price * 2
@@ -60,7 +63,7 @@ const BurgerConstructor = () => {
           <ConstructorElement
             type="top"
             isLocked={true}
-            text={bun.name}
+            text={`${bun.name} (верх)`}
             price={bun.price}
             thumbnail={bun.image}
           />
@@ -79,7 +82,7 @@ const BurgerConstructor = () => {
           <ConstructorElement
             type="bottom"
             isLocked={true}
-            text={bun.name}
+            text={`${bun.name} (низ)`}
             price={bun.price}
             thumbnail={bun.image}
             extraClass={styles.burger_constructor_bottom}
@@ -87,24 +90,26 @@ const BurgerConstructor = () => {
         )}
       </div>
       <div className={styles.burger_constructor_sum}>
-        <p className="text text_type_main-large">
-          {total}
-          <CurrencyIcon type="primary" />
-        </p>
-        <Button
-          onClick={() => orderClick()}
-          htmlType="button"
-          type="primary"
-          size="large"
-        >
-          Оформить заказ
-        </Button>
-        {order && (
-          <Modal
-            onClose={() => dispatch(resetOrder())}
-            closeOverlay={() => dispatch(resetOrder())}
-          >
-            <OrderDetails order={order} />
+        {disable && (
+          <>
+            <p className="text text_type_main-large">
+              {total}
+              <CurrencyIcon type="primary" />
+            </p>
+            <Button
+              onClick={() => orderClick()}
+              htmlType="button"
+              type="primary"
+              size="large"
+            >
+              Оформить заказ
+            </Button>
+          </>
+        )}
+
+        {openModal && (
+          <Modal onClose={() => closeModal()} closeOverlay={() => closeModal()}>
+            <OrderDetails />
           </Modal>
         )}
       </div>

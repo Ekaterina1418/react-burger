@@ -8,15 +8,13 @@ import { fetchIngredients } from '../features/api/apiSlice'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
-
 function App() {
   const dispatch = useDispatch()
-  
+
   useEffect(() => {
     dispatch(fetchIngredients())
   }, [])
-   const ingredients = useSelector((state) => state.ingredients)
-  
+  const ingredients = useSelector((state) => state.ingredients)
 
   return (
     <>

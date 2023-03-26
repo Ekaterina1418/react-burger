@@ -8,7 +8,7 @@ import Modal from '../modal/modal'
 import IngredientDetails from './ingredient-details/ingredient-details'
 import { useSelector } from 'react-redux'
 
-const BurgerIngredients = ({ data }) => {
+const BurgerIngredients = () => {
   const [currentIngredient, setCurrentIngredient] = useState(null)
   const [current, setCurrent] = useState('булки')
   const refTabs = useRef()
@@ -37,12 +37,12 @@ const BurgerIngredients = ({ data }) => {
       setCurrent('начинки')
     }
   }
-
-  const buns = data.filter((item) => item.type === 'bun')
-  const sauces = data.filter((item) => item.type === 'sauce')
-  const mains = data.filter((item) => item.type === 'main')
+  const ingredients = useSelector((store) => store.ingredients.ingredients)
+  const buns = ingredients.filter((item) => item.type === 'bun')
+  const sauces = ingredients.filter((item) => item.type === 'sauce')
+  const mains = ingredients.filter((item) => item.type === 'main')
   const bun = useSelector((state) => state.cart.bun)
-  const ingredients = useSelector((state) => state.cart.ingredient)
+  const ingredientsConstructor = useSelector((state) => state.cart.ingredient)
 
   const bunStatistics = useMemo(() => {
     if (buns.length === 0) {
@@ -51,18 +51,18 @@ const BurgerIngredients = ({ data }) => {
     let res = new Map()
     buns.forEach((b) => {
       const count = bun && b._id === bun._id ? 2 : 0
-      res[b._id] = count
+      res.set(b._id, count)
     })
 
     return res
-  })
+  }, [buns, bun])
 
   const sauceStatistics = useMemo(() => {
     if (sauces.length === 0) {
       return {}
     }
     let res = new Map()
-    const items = ingredients.filter((el) => el.type === 'sauce')
+    const items = ingredientsConstructor.filter((el) => el.type === 'sauce')
     return items.reduce(
       (acc, e) => acc.set(e._id, (acc.get(e._id) || 0) + 1),
       res
@@ -74,7 +74,7 @@ const BurgerIngredients = ({ data }) => {
       return {}
     }
     let res = new Map()
-    const items = ingredients.filter((el) => el.type === 'main')
+    const items = ingredientsConstructor.filter((el) => el.type === 'main')
     return items.reduce(
       (acc, e) => acc.set(e._id, (acc.get(e._id) || 0) + 1),
       res
@@ -111,49 +111,46 @@ const BurgerIngredients = ({ data }) => {
           <div
             className={`${styles.burger_ingredient} ${styles.burger_ingredient_pb}`}
           >
-            {data &&
-              buns.map((item) => {
-                return (
-                  <IngredientItem
-                    key={item._id}
-                    ingredient={item}
-                    selectIng={setCurrentIngredient}
-                    count={bunStatistics.get(item._id) || 0}
-                  />
-                )
-              })}
+            {buns.map((item) => {
+              return (
+                <IngredientItem
+                  key={item._id}
+                  ingredient={item}
+                  selectIng={setCurrentIngredient}
+                  count={bunStatistics.get(item._id) || 0}
+                />
+              )
+            })}
           </div>
           <h2 className={styles.burger_ingredient_name} ref={refSauce}>
             Соусы
           </h2>
           <div className={styles.burger_ingredient}>
-            {data &&
-              sauces.map((item) => {
-                return (
-                  <IngredientItem
-                    key={item._id}
-                    ingredient={item}
-                    selectIng={setCurrentIngredient}
-                    count={sauceStatistics.get(item._id) || 0}
-                  />
-                )
-              })}
+            {sauces.map((item) => {
+              return (
+                <IngredientItem
+                  key={item._id}
+                  ingredient={item}
+                  selectIng={setCurrentIngredient}
+                  count={sauceStatistics.get(item._id) || 0}
+                />
+              )
+            })}
           </div>
           <h2 className={styles.burger_ingredient_name} ref={refMain}>
             Начинки
           </h2>
           <div className={styles.burger_ingredient}>
-            {data &&
-              mains.map((item) => {
-                return (
-                  <IngredientItem
-                    key={item._id}
-                    ingredient={item}
-                    selectIng={setCurrentIngredient}
-                    count={mainStatistics.get(item._id) || 0}
-                  />
-                )
-              })}
+            {mains.map((item) => {
+              return (
+                <IngredientItem
+                  key={item._id}
+                  ingredient={item}
+                  selectIng={setCurrentIngredient}
+                  count={mainStatistics.get(item._id) || 0}
+                />
+              )
+            })}
           </div>
         </div>
       </div>

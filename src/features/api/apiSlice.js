@@ -7,7 +7,7 @@ const initialState = {
   loading: false,
   ingredients: [],
   error: '',
-  newTab: null,
+ 
 }
 
 export const fetchIngredients = createAsyncThunk(

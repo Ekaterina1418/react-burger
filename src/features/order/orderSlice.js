@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
+
 import { URL_ORDER } from '../../utils/data'
 
 const initialState = {
-  loading: true,
+  loading: false,
   order: null,
-  error: null,
+  error: '',
 }
 
 export const createOrder = createAsyncThunk(
@@ -42,10 +43,11 @@ const orderSlice = createSlice({
     builder.addCase(createOrder.fulfilled, (state, action) => {
       state.loading = false
       state.order = action.payload
+      state.error = ''
     })
     builder.addCase(createOrder.rejected, (state, action) => {
       state.loading = false
-      state.order = []
+      state.order = null
       state.error = action.error.message
     })
   },

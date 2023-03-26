@@ -1,16 +1,34 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './order-details.module.css'
 import img from '../../images/graphics.svg'
+import { createOrder } from '../../features/order/orderSlice'
+import { useDispatch, useSelector } from 'react-redux'
+const OrderDetails = () => {
+  const dispatch = useDispatch()
+  const bun = useSelector((state) => state.cart.bun)
+  const ingredient = useSelector((state) => state.cart.ingredient)
+  const order = useSelector((state) => state.orderes)
+  useEffect(() => {
+    if (bun !== null) {
+      let order = { ingredients: [bun._id, ...ingredient, bun._id] }
+      dispatch(createOrder(order))
+    }
+  }, [])
 
-const OrderDetails = (order) => {
   return (
     <div className={styles.burger_checkout_wrapper}>
-      <p className={`${styles.order_number} text text_type_digits-large`}>
-        {order.order.order.number}
-      </p>
-      <p className={`${styles.order_text} text text_type_main-medium`}>
-        {order.order.name}
-      </p>
+      {order.loading && <div>загрузка</div>}
+      {!order.loading && order.error && <div>Ошибка</div>}
+      {!order.loading && order.order !== null && (
+        <>
+          <p className={`${styles.order_number} text text_type_digits-large`}>
+            {order.order.order.number}
+          </p>
+          <p className={`${styles.order_text} text text_type_main-medium`}>
+            {order.order.name}
+          </p>
+        </>
+      )}
       <img className={styles.order_img} src={img} alt="check" />
       <p className={`${styles.order_status} text text_type_main-default`}>
         Ваш заказ начали готовить
