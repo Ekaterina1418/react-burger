@@ -9,11 +9,12 @@ const OrderDetails = () => {
   const ingredient = useSelector((state) => state.cart.ingredient)
   const order = useSelector((state) => state.orderes)
   useEffect(() => {
+     const items = ingredient.map((item) => item._id)
     if (bun !== null) {
-      let order = { ingredients: [bun._id, ...ingredient, bun._id] }
+      let order = { ingredients: [bun._id, ...items, bun._id] }
       dispatch(createOrder(order))
     }
-  }, [])
+  }, [dispatch])
 
   return (
     <div className={styles.burger_checkout_wrapper}>

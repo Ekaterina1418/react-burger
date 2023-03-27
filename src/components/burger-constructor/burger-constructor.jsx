@@ -20,7 +20,6 @@ import { resetOrder } from '../../features/order/orderSlice'
 import BurgerConstructorItem from './burger-constructor-item'
 const BurgerConstructor = () => {
   const [openModal, setOpenModal] = useState(false)
-  const [disable, setDisable] = useState(false)
   const bun = useSelector((state) => state.cart.bun)
   const ingredient = useSelector((state) => state.cart.ingredient)
 
@@ -29,7 +28,6 @@ const BurgerConstructor = () => {
   const [, dropRef] = useDrop({
     accept: 'ingredient',
     drop(itemId) {
-      setDisable(!disable)
       dispatch(addToCart(itemId))
     },
   })
@@ -90,22 +88,20 @@ const BurgerConstructor = () => {
         )}
       </div>
       <div className={styles.burger_constructor_sum}>
-        {disable && (
-          <>
-            <p className="text text_type_main-large">
-              {total}
-              <CurrencyIcon type="primary" />
-            </p>
-            <Button
-              onClick={() => orderClick()}
-              htmlType="button"
-              type="primary"
-              size="large"
-            >
-              Оформить заказ
-            </Button>
-          </>
-        )}
+        <>
+          <p className="text text_type_main-large">
+            {total}
+            <CurrencyIcon type="primary" />
+          </p>
+          <Button
+            onClick={() => orderClick()}
+            htmlType="button"
+            type="primary"
+            size="large"
+          >
+            Оформить заказ
+          </Button>
+        </>
 
         {openModal && (
           <Modal onClose={() => closeModal()} closeOverlay={() => closeModal()}>
