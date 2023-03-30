@@ -6,7 +6,6 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  align-items: center;
   padding-top: 100px;
 }
 
@@ -34,6 +33,7 @@
 .burger_constructor_sum {
   display: flex;
   justify-content: flex-end;
+  
   align-items: center;
 }
 .burger_constructor_sum p {
@@ -43,5 +43,4 @@
 .burger_constructor_item {
   display: flex;
   align-items: center;
-  gap: 10px;
 }
