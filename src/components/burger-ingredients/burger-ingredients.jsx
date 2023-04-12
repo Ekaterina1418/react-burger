@@ -1,5 +1,6 @@
 import React, { useState, useRef, useMemo } from 'react'
 import styles from './burger-ingredients.module.css'
+import { Link, useLocation } from 'react-router-dom'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import PropTypes from 'prop-types'
 import { DATA_TYPES } from '../../utils/types'
@@ -80,6 +81,7 @@ const BurgerIngredients = () => {
       res
     )
   }, [mains, ingredients])
+  let location = useLocation()
   return (
     <section>
       <div className={styles.burger_ingredients_wrapper}>
@@ -154,15 +156,6 @@ const BurgerIngredients = () => {
           </div>
         </div>
       </div>
-      {currentIngredient && (
-        <Modal
-          title="Детали ингредиента"
-          onClose={() => setCurrentIngredient(null)}
-          closeOverlay={() => setCurrentIngredient(null)}
-        >
-          <IngredientDetails ingredient={currentIngredient} />
-        </Modal>
-      )}
     </section>
   )
 }

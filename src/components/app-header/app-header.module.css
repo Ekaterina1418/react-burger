@@ -8,9 +8,13 @@
   composes: pb-4 pt-4 from global;
   justify-content: space-between;
 }
-.color_active {
+.active {
   color: #F2F2F3;
+  text-decoration: none;
+  composes: text text_type_main-medium from global;
+ 
 }
+
 .link {
   border: none;
   background-color: transparent;
@@ -20,20 +24,22 @@
   composes: text text_type_main-medium from global;
 }
 .header_link_order {
-  composes: pr-5 pb-5 pt-5 from global;
+  composes: pr-5 pb-5 pt-5 text_color_inactive from global;
   composes: link;
   text-decoration: none;
+  
 }
+
 .header_link_order svg {
   padding-right: 8px;
 }
 .header_link_account {
   composes: link;
-  composes: pb-4 pt-4 from global;
+  composes: pb-4 pt-4 text_color_inactive from global;
   padding-right: 20px;
   padding-left: 23px;
   text-decoration: none;
 }
 .header_link_account svg {
-  padding-right: 11px;
+  margin-right: 11px;
 }

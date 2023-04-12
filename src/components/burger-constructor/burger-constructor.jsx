@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react'
+import React, { useMemo, useState} from 'react'
 import {
   CurrencyIcon,
   Button,
@@ -18,11 +18,12 @@ import {
 } from '../../features/cart/cartSlice'
 import { resetOrder } from '../../features/order/orderSlice'
 import BurgerConstructorItem from './burger-constructor-item'
+import { useNavigate } from 'react-router-dom'
 const BurgerConstructor = () => {
   const [openModal, setOpenModal] = useState(false)
   const bun = useSelector((state) => state.cart.bun)
   const ingredient = useSelector((state) => state.cart.ingredient)
-
+  const user = useSelector((state) => state.user.user)
   const dispatch = useDispatch()
 
   const [, dropRef] = useDrop({
@@ -35,9 +36,14 @@ const BurgerConstructor = () => {
   const handleMoveItem = ({ toIndex: hoverIndex, fromIndex: dragIndex }) => {
     dispatch(sortingIngredient({ toIndex: hoverIndex, fromIndex: dragIndex }))
   }
-
+const navigate = useNavigate()
   const orderClick = () => {
-    setOpenModal(!openModal)
+    
+    if(user) {
+     setOpenModal(!openModal)
+    } else {
+    navigate('/login', { replace: true })  
+    }
   }
   const closeModal = () => {
     dispatch(resetOrder())
@@ -64,6 +70,7 @@ const BurgerConstructor = () => {
             text={`${bun.name} (верх)`}
             price={bun.price}
             thumbnail={bun.image}
+            extraClass={styles.wrapper_ingreients}
           />
         )}
         {ingredient &&

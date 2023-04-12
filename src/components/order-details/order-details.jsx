@@ -3,13 +3,15 @@ import styles from './order-details.module.css'
 import img from '../../images/graphics.svg'
 import { createOrder } from '../../features/order/orderSlice'
 import { useDispatch, useSelector } from 'react-redux'
+
 const OrderDetails = () => {
   const dispatch = useDispatch()
   const bun = useSelector((state) => state.cart.bun)
   const ingredient = useSelector((state) => state.cart.ingredient)
   const order = useSelector((state) => state.orderes)
+
   useEffect(() => {
-     const items = ingredient.map((item) => item._id)
+    const items = ingredient.map((item) => item._id)
     if (bun !== null) {
       let order = { ingredients: [bun._id, ...items, bun._id] }
       dispatch(createOrder(order))

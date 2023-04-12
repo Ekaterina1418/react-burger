@@ -25,3 +25,7 @@
   composes: text text_type_main-small from global;
   text-align: center;
 }
+.link {
+  text-decoration: none;
+  color: #FFFFFF;
+}
