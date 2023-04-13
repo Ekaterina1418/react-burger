@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux'
 import styles from './reset-password.module.css'
 import { resetPassword } from '../../features/auth/userSlice'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
-import AppHeader from '../../components/app-header/app-header'
 import {
   PasswordInput,
   Button,
@@ -27,12 +26,11 @@ const ResetPassword = () => {
   }
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(resetPassword(form))
+    dispatch(resetPassword(form, { onSuccess: () => navigate('/login') }))
     navigate('/login', { replace: true })
   }
   return (
     <>
-      <AppHeader />
       <div className={styles.wrap}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <h3 className={styles.title}>Восстановление пароля</h3>

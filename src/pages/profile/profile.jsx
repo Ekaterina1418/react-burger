@@ -1,15 +1,13 @@
 import React from 'react'
 import styles from './profile.module.css'
-import {  NavLink, Outlet} from 'react-router-dom'
-import AppHeader from '../../components/app-header/app-header'
+import { NavLink, Outlet } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../features/auth/userSlice'
 const Profile = () => {
   const dispatch = useDispatch()
-  
+
   return (
     <>
-      <AppHeader />
       <div className={styles.wrapper}>
         <div className={styles.links}>
           <NavLink
@@ -17,16 +15,17 @@ const Profile = () => {
             className={({ isActive }) =>
               isActive ? `${styles.active}` : `${styles.category}`
             }
-          end>
+            end
+          >
             Профиль
           </NavLink>
           <NavLink
-            to="/profile/orders" 
+            to="/profile/orders"
             className={({ isActive }) =>
               isActive ? `${styles.active}` : `${styles.category}`
             }
           >
-           История заказов
+            История заказов
           </NavLink>
           <p className={styles.category} onClick={() => dispatch(logout())}>
             Выход

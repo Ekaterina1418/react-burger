@@ -1,11 +1,14 @@
 import React from 'react'
-import AppHeader from '../../components/app-header/app-header'
+import {useSelector} from 'react-redux'
 import IngredientDetails from '../../components/burger-ingredients/ingredient-details/ingredient-details'
 import styles from './ingredient-info.module.css'
-const IngredientInfo = ({ ingredients, loading }) => {
+const IngredientInfo = () => {
+   const { ingredients, loading } = useSelector(
+     (state) => state.ingredients
+   )
+
   return (
     <>
-      <AppHeader />
       <div className={styles.wrapper}>
         {!loading && ingredients && (
           <IngredientDetails ingredients={ingredients} />

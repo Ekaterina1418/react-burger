@@ -45,7 +45,7 @@ const BurgerConstructorItem = ({
     },
   })
 
-  const [{ isDragging }, drag] = useDrag({
+  const [, drag] = useDrag({
     type: 'sorting',
     item: () => {
       return { id, index }
@@ -54,7 +54,6 @@ const BurgerConstructorItem = ({
       isDrag: monitor.isDragging(),
     }),
   })
-  const opacity = isDragging ? 1 : 0
   drag(drop(ref))
 
   return (

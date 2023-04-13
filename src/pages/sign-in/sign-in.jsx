@@ -1,9 +1,8 @@
-import React, { useState} from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../../features/auth/userSlice'
 import { Link } from 'react-router-dom'
 import styles from './sign-in.module.css'
-import AppHeader from '../../components/app-header/app-header'
 import {
   EmailInput,
   Button,
@@ -25,7 +24,6 @@ const SignIn = () => {
 
   return (
     <>
-      <AppHeader />
       <div className={styles.wrap}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <h3 className={styles.title}>Вход</h3>
@@ -43,7 +41,7 @@ const SignIn = () => {
               name={'password'}
               extraClass="mb-2"
             />
-            { user.error && <div className={styles.error}>{user.error}</div>}
+            {user.error && <div className={styles.error}>{user.error}</div>}
             <Button
               htmlType="submit"
               type="primary"

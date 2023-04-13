@@ -1,12 +1,9 @@
 import React, { useState, useRef, useMemo } from 'react'
 import styles from './burger-ingredients.module.css'
-import { Link, useLocation } from 'react-router-dom'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import PropTypes from 'prop-types'
 import { DATA_TYPES } from '../../utils/types'
 import IngredientItem from './ingredient-item/ingredient-item'
-import Modal from '../modal/modal'
-import IngredientDetails from './ingredient-details/ingredient-details'
 import { useSelector } from 'react-redux'
 
 const BurgerIngredients = () => {
@@ -81,7 +78,6 @@ const BurgerIngredients = () => {
       res
     )
   }, [mains, ingredients])
-  let location = useLocation()
   return (
     <section>
       <div className={styles.burger_ingredients_wrapper}>

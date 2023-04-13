@@ -3,27 +3,30 @@ import styles from './forgot-password.module.css'
 import { useDispatch } from 'react-redux'
 import { useNavigate, Link, useLocation } from 'react-router-dom'
 import { forgotPassword } from '../../features/auth/userSlice'
-import AppHeader from '../../components/app-header/app-header'
 import {
   EmailInput,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 const ResetPassword = () => {
   const [email, setEmail] = useState('')
- 
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(forgotPassword(email))
-    localStorage.setItem()
+    dispatch(
+      forgotPassword(email, {
+        onSuccess: () => navigate('/reset-password'),
+      })
+    )
     setEmail('')
-   { navigate("/reset-password", { state: { from: location.pathname }})}
+    navigate('/reset-password', { state: { from: location.pathname } })
+    
   }
   return (
     <>
-      <AppHeader />
       <div className={styles.wrap}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <h3 className={styles.title}>Восстановление пароля</h3>

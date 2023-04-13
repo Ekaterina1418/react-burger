@@ -174,9 +174,7 @@ export const getUser = createAsyncThunk(
       if (success) {
         dispatch(setUser(user))
         dispatch(setAuthChecked(true))
-      } else {
-        throw 'Oшибка ...'
-      }
+      } 
     } catch (error) {
       return rejectWithValue(error.message)
     }

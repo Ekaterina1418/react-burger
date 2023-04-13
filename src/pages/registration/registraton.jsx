@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { registerUser } from '../../features/auth/userSlice'
-
 import { Link } from 'react-router-dom'
 import styles from './registration.module.css'
-import AppHeader from '../../components/app-header/app-header'
 import {
   EmailInput,
   Input,
@@ -28,12 +26,10 @@ const Registraton = () => {
     setName('')
     setEmail('')
     setPassword('')
-  
   }
 
   return (
     <>
-      <AppHeader />
       <div className={styles.wrap}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <h3 className={styles.title}>Регистрация</h3>

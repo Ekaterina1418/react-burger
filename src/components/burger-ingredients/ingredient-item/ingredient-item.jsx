@@ -9,7 +9,6 @@ import {
 import { useDrag } from 'react-dnd'
 import { useLocation } from 'react-router-dom'
 
-
 const IngredientItem = ({ selectIng, ingredient, count }) => {
   const location = useLocation()
   const ingredientId = ingredient['_id']
@@ -21,7 +20,7 @@ const IngredientItem = ({ selectIng, ingredient, count }) => {
       isDrag: monitor.isDragging(),
     }),
   })
- 
+
   return (
     !isDrag && (
       <Link
@@ -55,5 +54,7 @@ const IngredientItem = ({ selectIng, ingredient, count }) => {
 }
 IngredientItem.propTypes = {
   ingredient: PropTypes.object,
+  selectIng: PropTypes.func,
+  count: PropTypes.number,
 }
 export default IngredientItem

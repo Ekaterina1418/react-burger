@@ -45,7 +45,7 @@ const ProfileForm = () => {
         onChange={(e) => setEmail(e.target.value)}
         name={'email'}
         placeholder="Логин"
-        isIcon={true}
+        isIcon
       />
       <PasswordInput
         onChange={(e) => setPassword(e.target.value)}
@@ -55,9 +55,9 @@ const ProfileForm = () => {
       />
       {name !== user.name && email !== user.email && (
         <div className={styles.buttons}>
-          <p className={styles.cancel} onClick={() => userCancel()}>
+          <Button  className={styles.cancel} onClick={() => userCancel()} htmlType='reset'>
             Отмена
-          </p>
+          </Button>
           <Button
             htmlType="submit"
             type="primary"

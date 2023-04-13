@@ -2,8 +2,11 @@ import React, { useMemo } from 'react'
 import styles from './ingredient-details.module.css'
 import PropTypes from 'prop-types'
 import { useParams } from 'react-router-dom'
-
-const IngredientDetails = ({ ingredients, loading }) => {
+import { useSelector } from 'react-redux'
+const IngredientDetails = () => {
+   const { ingredients, loading } = useSelector(
+     (state) => state.ingredients
+   )
   const { ingredientId } = useParams()
 
   const ingredient = useMemo(() => {
