@@ -25,7 +25,7 @@ const cartSlice = createSlice({
       state.bun = null
     },
     removeIngredient(state, action) {
- const index =   state.ingredient.filter(
+       const index = state.ingredient.filter(
         (item) => item.id !== action.payload.id
       )
       if(index === -1) {

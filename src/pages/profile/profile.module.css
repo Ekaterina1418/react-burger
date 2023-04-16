@@ -1,0 +1,48 @@
+.wrapper {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  gap: 68px;
+  padding-top: 120px;
+}
+.form_profile {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.category {
+  composes: text text_type_main-default text_color_inactive from global;
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.active {
+  color: #ffffff;
+  text-decoration: none;
+  composes: text text_type_main-default text_color_inactive from global;
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 700;
+}
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+.button_save {
+  width: 167px;
+}
+.cancel {
+  color: #4c4cff;
+  margin-right: 28px;
+  text-align: center;
+  background: transparent;
+  border: none;
+}

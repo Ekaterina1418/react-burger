@@ -6,14 +6,17 @@ import {
 import { useDrag, useDrop } from 'react-dnd'
 import styles from './burger-constructor.module.css'
 
-
-const BurgerConstructorItem = ({ingredient, id, index, handleClose, moveCard }) => {
- 
- 
- const ref = useRef(null)
+const BurgerConstructorItem = ({
+  ingredient,
+  id,
+  index,
+  handleClose,
+  moveCard,
+}) => {
+  const ref = useRef(null)
   const [, drop] = useDrop({
     accept: 'sorting',
-    hover:(item, monitor) => {
+    hover: (item, monitor) => {
       if (!ref.current) {
         return
       }
@@ -42,22 +45,17 @@ const BurgerConstructorItem = ({ingredient, id, index, handleClose, moveCard }) 
     },
   })
 
-  const [{ isDragging }, drag] = useDrag({
+  const [, drag] = useDrag({
     type: 'sorting',
     item: () => {
-      return {id, index }
+      return { id, index }
     },
     collect: (monitor) => ({
       isDrag: monitor.isDragging(),
     }),
   })
-  const opacity = isDragging ? 1 : 0
   drag(drop(ref))
 
-
-
-
-  
   return (
     <div className={styles.burger_constructor_item} ref={ref}>
       <DragIcon />
@@ -66,7 +64,7 @@ const BurgerConstructorItem = ({ingredient, id, index, handleClose, moveCard }) 
         text={ingredient.name}
         price={ingredient.price}
         handleClose={handleClose}
-        
+        extraClass={styles.wrapper_ingredients}
       />
     </div>
   )

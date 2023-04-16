@@ -4,8 +4,6 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import PropTypes from 'prop-types'
 import { DATA_TYPES } from '../../utils/types'
 import IngredientItem from './ingredient-item/ingredient-item'
-import Modal from '../modal/modal'
-import IngredientDetails from './ingredient-details/ingredient-details'
 import { useSelector } from 'react-redux'
 
 const BurgerIngredients = () => {
@@ -154,15 +152,6 @@ const BurgerIngredients = () => {
           </div>
         </div>
       </div>
-      {currentIngredient && (
-        <Modal
-          title="Детали ингредиента"
-          onClose={() => setCurrentIngredient(null)}
-          closeOverlay={() => setCurrentIngredient(null)}
-        >
-          <IngredientDetails ingredient={currentIngredient} />
-        </Modal>
-      )}
     </section>
   )
 }

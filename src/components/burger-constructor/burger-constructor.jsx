@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react'
+import React, { useMemo } from 'react'
 import {
   CurrencyIcon,
   Button,
@@ -16,14 +16,17 @@ import {
   addToCart,
   sortingIngredient,
 } from '../../features/cart/cartSlice'
+import { createOrder } from '../../features/order/orderSlice'
 import { resetOrder } from '../../features/order/orderSlice'
 import BurgerConstructorItem from './burger-constructor-item'
+import { useNavigate } from 'react-router-dom'
 const BurgerConstructor = () => {
-  const [openModal, setOpenModal] = useState(false)
   const bun = useSelector((state) => state.cart.bun)
   const ingredient = useSelector((state) => state.cart.ingredient)
-
+  const user = useSelector((state) => state.user.user)
+  const order = useSelector((state) => state.orderes)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const [, dropRef] = useDrop({
     accept: 'ingredient',
@@ -37,11 +40,17 @@ const BurgerConstructor = () => {
   }
 
   const orderClick = () => {
-    setOpenModal(!openModal)
+    const items = ingredient.map((item) => item._id)
+    let order = { ingredients: [bun._id, ...items, bun._id] }
+    if (user && bun !== null) {
+      dispatch(createOrder(order))
+    } else {
+      navigate('/login', { replace: true })
+    }
   }
+
   const closeModal = () => {
     dispatch(resetOrder())
-    setOpenModal(!openModal)
   }
   const total = useMemo(() => {
     const amountIngredients = ingredient.reduce((acc, item) => {
@@ -64,6 +73,7 @@ const BurgerConstructor = () => {
             text={`${bun.name} (верх)`}
             price={bun.price}
             thumbnail={bun.image}
+            extraClass={styles.wrapper_ingreients}
           />
         )}
         {ingredient &&
@@ -103,9 +113,11 @@ const BurgerConstructor = () => {
           </Button>
         </>
 
-        {openModal && (
+        {order.loading && <div>загрузка</div>}
+        {!order.loading && order.error && <div>Ошибка</div>}
+        {!order.loading && order.order !== null && (
           <Modal onClose={() => closeModal()} closeOverlay={() => closeModal()}>
-            <OrderDetails />
+            <OrderDetails order={order} />
           </Modal>
         )}
       </div>

@@ -10,7 +10,7 @@
 }
 
 .burger_constructor_scroll {
-  height: 440px;
+   height: 240px; 
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
@@ -19,6 +19,7 @@
 
 .burger_constructor_bottom {
   margin-bottom: 60px;
+   
 }
 .burger_constructor_scroll::-webkit-scrollbar {
   width: 8px;
