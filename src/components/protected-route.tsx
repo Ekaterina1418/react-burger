@@ -1,9 +1,18 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useLocation, Navigate } from 'react-router-dom'
-const ProtectedRoute = ({ onlyUnAuth = false, component, ...rest }) => {
-  const isAuthChecked = useSelector((state) => state.user.isAuthChecked)
-  const user = useSelector((state) => state.user.user)
+
+interface ProtectedRouteProps {
+  onlyUnAuth?: boolean
+  component: React.ReactNode
+}
+type TComponent = Pick<ProtectedRouteProps, 'component'>
+const ProtectedRoute = ({
+  onlyUnAuth = false,
+  component,
+}: ProtectedRouteProps) => {
+  const isAuthChecked = useSelector((state: any) => state.user.isAuthChecked)
+  const user = useSelector((state: any) => state.user.user)
   const location = useLocation()
 
   if (!isAuthChecked) {
@@ -19,11 +28,10 @@ const ProtectedRoute = ({ onlyUnAuth = false, component, ...rest }) => {
     return <Navigate to="/login" state={{ from: location }} />
   }
 
- 
-  return component
+  return <>{component}</>
 }
 
 export const OnlyAuth = ProtectedRoute
-export const OnlyUnAuth = ({ component }) => (
+export const OnlyUnAuth = ({ component }: TComponent) => (
   <ProtectedRoute onlyUnAuth={true} component={component} />
 )

@@ -9,7 +9,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux'
 import { userUpdate } from '../../features/auth/userSlice'
 const ProfileForm = () => {
-  const user = useSelector((state) => state.user.user)
+  const user = useSelector((state:any) => state.user.user)
   const dispatch = useDispatch()
   const [name, setName] = useState(user.name)
   const [email, setEmail] = useState(user.email)
@@ -19,8 +19,9 @@ const ProfileForm = () => {
     email: email,
     password: password,
   }
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()
+  //@ts-ignore
     dispatch(userUpdate(form))
   }
   const userCancel = () => {

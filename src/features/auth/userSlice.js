@@ -174,7 +174,7 @@ export const getUser = createAsyncThunk(
       if (success) {
         dispatch(setUser(user))
         dispatch(setAuthChecked(true))
-      } 
+      }
     } catch (error) {
       return rejectWithValue(error.message)
     }
@@ -228,15 +228,25 @@ export const userUpdate = createAsyncThunk(
     }
   }
 )
-
+// export interface User {
+//   name:string
+//   email: string
+// }
+// export interface userState {
+//   loading: boolean
+//   user: User
+//   error: string | null
+//   isAuthChecked: boolean
+// }
+const initialState = {
+  loading: false,
+  user: null,
+  error: null,
+  isAuthChecked: false,
+}
 const userSlice = createSlice({
   name: 'user',
-  initialState: {
-    loading: false,
-    user: null,
-    error: null,
-    isAuthChecked: false,
-  },
+  initialState,
   reducers: {
     setAuthChecked: (state, action) => {
       state.isAuthChecked = action.payload
@@ -284,7 +294,7 @@ const userSlice = createSlice({
     state.loading = true
     state.error = null
   },
-  [refreshToken.fulfilled]: (state, action) => {
+  [refreshToken.fulfilled]: (state) => {
     state.loading = false
   },
   [refreshToken.rejected]: (state, action) => {
@@ -295,7 +305,7 @@ const userSlice = createSlice({
     state.loading = true
     state.error = null
   },
-  [resetPassword.fulfilled]: (state, action) => {
+  [resetPassword.fulfilled]: (state) => {
     state.loading = false
   },
   [resetPassword.rejected]: (state, action) => {
@@ -306,7 +316,7 @@ const userSlice = createSlice({
     state.loading = true
     state.error = null
   },
-  [forgotPassword.fulfilled]: (state, action) => {
+  [forgotPassword.fulfilled]: (state) => {
     state.loading = false
   },
   [forgotPassword.rejected]: (state, action) => {

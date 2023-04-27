@@ -5,11 +5,23 @@ import styles from './modal.module.css'
 import ModalOverlay from './modal-overlay/modal-overlay'
 const modalRootElement = document.getElementById('react-modal')
 
-const Modal = ({ children, onClose, title, closeOverlay }) => {
-  const [close, setClose] = useState(true)
-  const closeModal = (e) => {
+type TModalProps = {
+  onClose: () => void
+  children: React.ReactNode
+  title?: string
+  closeOverlay: () => void
+}
+
+const Modal = ({
+  children,
+  onClose,
+  title,
+  closeOverlay,
+}: TModalProps): JSX.Element => {
+  const [close, setClose] = useState<boolean>(true)
+  const closeModal = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
-     setClose(false)
+      setClose(false)
     }
   }
   useEffect(() => {
@@ -34,7 +46,7 @@ const Modal = ({ children, onClose, title, closeOverlay }) => {
       )}
     </>,
 
-    modalRootElement
+    modalRootElement as Element
   )
 }
 export default Modal

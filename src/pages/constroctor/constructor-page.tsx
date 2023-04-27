@@ -9,7 +9,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 
 const ConstructorPage = () => {
    const { ingredients, loading, error } = useSelector(
-     (state) => state.ingredients
+     (state:any) => state.ingredients
    )
 
   return (
@@ -21,7 +21,7 @@ const ConstructorPage = () => {
             {!loading && error && <div>{error}</div>}
             {!loading && ingredients !== null && (
               <>
-                <BurgerIngredients data={ingredients} />
+                <BurgerIngredients  />
                 <BurgerConstructor />
               </>
             )}

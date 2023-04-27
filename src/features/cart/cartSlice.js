@@ -1,5 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit'
+import {  createSlice } from '@reduxjs/toolkit'
 import { v4 as uuidv4 } from 'uuid'
+
+
+// export interface CartState {
+//   bun: TIngredient
+//   ingredient: TIngredient[]
+// }
+
 const initialCart = {
   bun: null,
   ingredient: [],
@@ -26,7 +33,7 @@ const cartSlice = createSlice({
     },
     removeIngredient(state, action) {
        const index = state.ingredient.filter(
-        (item) => item.id !== action.payload.id
+        (item) => item.id !== action.payload
       )
       if(index === -1) {
         return

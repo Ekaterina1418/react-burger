@@ -5,10 +5,8 @@ import {
   ConstructorElement,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDrop } from 'react-dnd'
-import PropTypes from 'prop-types'
 import styles from './burger-constructor.module.css'
 import Modal from '../modal/modal'
-import { DATA_TYPES } from '../../utils/types'
 import OrderDetails from '../order-details/order-details'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -20,11 +18,13 @@ import { createOrder } from '../../features/order/orderSlice'
 import { resetOrder } from '../../features/order/orderSlice'
 import BurgerConstructorItem from './burger-constructor-item'
 import { useNavigate } from 'react-router-dom'
+import { TIngredient } from '../../utils/types'
+
 const BurgerConstructor = () => {
-  const bun = useSelector((state) => state.cart.bun)
-  const ingredient = useSelector((state) => state.cart.ingredient)
-  const user = useSelector((state) => state.user.user)
-  const order = useSelector((state) => state.orderes)
+  const bun = useSelector((state: any) => state.cart.bun)
+  const ingredient = useSelector((state: any) => state.cart.ingredient)
+  const user = useSelector((state: any) => state.user.user)
+  const order = useSelector((state: any) => state.orderes)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -35,14 +35,18 @@ const BurgerConstructor = () => {
     },
   })
 
-  const handleMoveItem = ({ toIndex: hoverIndex, fromIndex: dragIndex }) => {
+  const handleMoveItem = ({
+    toIndex: hoverIndex,
+    fromIndex: dragIndex,
+  }: any) => {
     dispatch(sortingIngredient({ toIndex: hoverIndex, fromIndex: dragIndex }))
   }
 
   const orderClick = () => {
-    const items = ingredient.map((item) => item._id)
+    const items = ingredient.map((item: any) => item._id)
     let order = { ingredients: [bun._id, ...items, bun._id] }
     if (user && bun !== null) {
+      // @ts-ignore
       dispatch(createOrder(order))
     } else {
       navigate('/login', { replace: true })
@@ -53,7 +57,7 @@ const BurgerConstructor = () => {
     dispatch(resetOrder())
   }
   const total = useMemo(() => {
-    const amountIngredients = ingredient.reduce((acc, item) => {
+    const amountIngredients = ingredient.reduce((acc: number, item: any) => {
       acc += item.price * 2
       return acc
     }, 0)
@@ -77,12 +81,13 @@ const BurgerConstructor = () => {
           />
         )}
         {ingredient &&
-          ingredient.map((item, index) => (
+          ingredient.map((item: any, index: number) => (
             <BurgerConstructorItem
               ingredient={item}
               key={item.id}
               index={index}
               moveCard={handleMoveItem}
+              // @ts-ignore
               handleClose={(item) => dispatch(removeIngredient(item))}
             />
           ))}
@@ -123,9 +128,6 @@ const BurgerConstructor = () => {
       </div>
     </div>
   )
-}
-BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(DATA_TYPES),
 }
 
 export default BurgerConstructor

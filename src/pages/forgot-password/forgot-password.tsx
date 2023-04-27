@@ -14,16 +14,18 @@ const ResetPassword = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()
+    
     dispatch(
+      //@ts-ignore
       forgotPassword(email, {
         onSuccess: () => navigate('/reset-password'),
       })
     )
+    
     setEmail('')
     navigate('/reset-password', { state: { from: location.pathname } })
-    
   }
   return (
     <>
@@ -49,7 +51,7 @@ const ResetPassword = () => {
           </form>
           <p className={styles.paragraph}>
             Уже зарегистрированы?
-            <Link to="/login" className={styles.link} href="#">
+            <Link to="/login" className={styles.link}>
               Войти
             </Link>
           </p>
