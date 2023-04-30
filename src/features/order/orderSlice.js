@@ -1,9 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-
-
 import { URL_ORDER } from '../../utils/data'
-
+// export interface Order {
+//   name: string
+//   order: {
+//     number: number
+//   }
+// }
+// export interface orderState {
+//   loading: boolean
+//   order: Order
+//   error: string
+// }
 const initialState = {
   loading: false,
   order: null,

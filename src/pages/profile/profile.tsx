@@ -5,7 +5,10 @@ import { useDispatch } from 'react-redux'
 import { logout } from '../../features/auth/userSlice'
 const Profile = () => {
   const dispatch = useDispatch()
-
+  const handleLogout = () => {
+    //@ts-ignore
+    dispatch(logout())
+  }
   return (
     <>
       <div className={styles.wrapper}>
@@ -27,7 +30,7 @@ const Profile = () => {
           >
             История заказов
           </NavLink>
-          <p className={styles.category} onClick={() => dispatch(logout())}>
+          <p className={styles.category} onClick={() => handleLogout}>
             Выход
           </p>
           <p className="text text_type_main-default text_color_inactive">

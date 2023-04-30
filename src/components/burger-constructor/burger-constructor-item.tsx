@@ -6,15 +6,29 @@ import {
 import { useDrag, useDrop } from 'react-dnd'
 import styles from './burger-constructor.module.css'
 
+type TIngredientDragType = {
+  id: string
+  index: number
+}
+
+interface TIngredientProps extends TIngredientDragType {
+  ingredient: {
+    name: string
+    image: string
+    price: number
+  }
+  handleClose: () => void
+  moveCard: (toIndex: any) => any
+}
 const BurgerConstructorItem = ({
   ingredient,
   id,
   index,
   handleClose,
   moveCard,
-}) => {
-  const ref = useRef(null)
-  const [, drop] = useDrop({
+}: TIngredientProps): JSX.Element => {
+  const ref = useRef<HTMLDivElement | null>(null)
+  const [, drop] = useDrop<TIngredientDragType>({
     accept: 'sorting',
     hover: (item, monitor) => {
       if (!ref.current) {
@@ -30,7 +44,9 @@ const BurgerConstructorItem = ({
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
 
       const clientOffset = monitor.getClientOffset()
-
+      if (!clientOffset) {
+        return
+      }
       const hoverClientY = clientOffset.y - hoverBoundingRect.top
 
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
@@ -45,7 +61,7 @@ const BurgerConstructorItem = ({
     },
   })
 
-  const [, drag] = useDrag({
+  const [, drag] = useDrag<TIngredientDragType>({
     type: 'sorting',
     item: () => {
       return { id, index }
@@ -58,7 +74,7 @@ const BurgerConstructorItem = ({
 
   return (
     <div className={styles.burger_constructor_item} ref={ref}>
-      <DragIcon />
+      <DragIcon type="primary" />
       <ConstructorElement
         thumbnail={ingredient.image}
         text={ingredient.name}

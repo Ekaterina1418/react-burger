@@ -2,7 +2,19 @@ import React from 'react'
 import styles from './order-details.module.css'
 import img from '../../images/graphics.svg'
 import PropTypes from 'prop-types'
-const OrderDetails = ({ order }) => {
+
+ interface Order {
+  name: string
+  order: {
+    number: number
+  }
+}
+interface orderProps {
+  order: {
+    order: Order
+  }
+}
+const OrderDetails = ({ order }: orderProps) => {
   return (
     <div className={styles.burger_checkout_wrapper}>
       <>
@@ -23,7 +35,5 @@ const OrderDetails = ({ order }) => {
     </div>
   )
 }
-OrderDetails.prorTypes = {
-  order: PropTypes.object
-}
+
 export default OrderDetails

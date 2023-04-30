@@ -1,50 +1,34 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { registerUser } from '../../features/auth/userSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { login } from '../../features/auth/userSlice'
 import { Link } from 'react-router-dom'
-import styles from './registration.module.css'
+import styles from './sign-in.module.css'
 import {
   EmailInput,
-  Input,
   Button,
   PasswordInput,
 } from '@ya.praktikum/react-developer-burger-ui-components'
-
-const Registraton = () => {
-  const [name, setName] = useState('')
+const SignIn = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const user = useSelector((state:any) => state.user)
   const dispatch = useDispatch()
   const form = {
     email: email,
     password: password,
-    name: name,
   }
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()
-    dispatch(registerUser(form))
-    setName('')
-    setEmail('')
-    setPassword('')
+    //@ts-ignore
+    dispatch(login(form))
   }
 
   return (
     <>
       <div className={styles.wrap}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-          <h3 className={styles.title}>Регистрация</h3>
-          <form onSubmit={handleSubmit} className={styles.form}>
-            <Input
-              type={'text'}
-              placeholder={'Имя'}
-              onChange={(e) => setName(e.target.value)}
-              value={name}
-              name={'name'}
-              error={false}
-              errorText={'Ошибка'}
-              size={'default'}
-              extraClass="ml-1"
-            />
+          <h3 className={styles.title}>Вход</h3>
+          <form className={styles.form} onSubmit={handleSubmit}>
             <EmailInput
               onChange={(e) => setEmail(e.target.value)}
               value={email}
@@ -58,20 +42,26 @@ const Registraton = () => {
               name={'password'}
               extraClass="mb-2"
             />
-
+            {user.error && <div className={styles.error}>{user.error}</div>}
             <Button
               htmlType="submit"
               type="primary"
               size="medium"
               extraClass={styles.button}
             >
-              Зарегистрироваться
+              Войти
             </Button>
           </form>
           <p className={styles.paragraph}>
-            Уже зарегистрированы?
-            <Link to="/" className={styles.link} href="#">
-              Войти
+            Вы — новый пользователь?
+            <Link to="/registration" className={styles.link}>
+              Зарегистрироваться
+            </Link>
+          </p>
+          <p className={styles.paragraph}>
+            Забыли пароль?
+            <Link to="/forgot-password" className={styles.link}>
+              Восстановить пароль
             </Link>
           </p>
         </div>
@@ -80,4 +70,4 @@ const Registraton = () => {
   )
 }
 
-export default Registraton
+export default SignIn

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
+import * as H from 'history'
 import { useDispatch } from 'react-redux'
 import '../App.css'
 import { fetchIngredients } from '../features/api/apiSlice'
@@ -23,14 +24,17 @@ function App() {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    //@ts-ignore
     dispatch(checkUserAuth())
+    //@ts-ignore
     dispatch(fetchIngredients())
   }, [dispatch])
 
   const navigate = useNavigate()
   const location = useLocation()
-  const background = location.state && location.state.background
-  const handleModalClose = () => {
+  const background =
+    (location.state as { background?: H.Location }) && location.state.background
+  const handleModalClose = (): void => {
     navigate(-1)
   }
   return (
@@ -58,7 +62,7 @@ function App() {
             path="/reset-password"
             element={<OnlyUnAuth component={<ResetPassword />} />}
           />
-          <Route path='*' element={<Page404/>}/>
+          <Route path="*" element={<Page404 />} />
           <Route path="/profile" element={<OnlyAuth component={<Profile />} />}>
             <Route index element={<ProfileForm />} />
             <Route path="/profile/orders" element={<Orders />} />
@@ -71,7 +75,11 @@ function App() {
           <Route
             path="/ingredient/:ingredientId"
             element={
-              <Modal onClose={handleModalClose} title="Детали ингредиента">
+              <Modal
+                onClose={handleModalClose}
+                closeOverlay={handleModalClose}
+                title="Детали ингредиента"
+              >
                 <IngredientDetails />
               </Modal>
             }

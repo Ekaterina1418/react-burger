@@ -24,8 +24,9 @@ const ResetPassword = () => {
     password: password,
     token: token,
   }
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()
+    //@ts-ignore
     dispatch(resetPassword(form, { onSuccess: () => navigate('/login') }))
     navigate('/login', { replace: true })
   }
@@ -61,7 +62,7 @@ const ResetPassword = () => {
           </form>
           <p className={styles.paragraph}>
             Уже зарегистрированы?
-            <Link to="/login" className={styles.link} href="#">
+            <Link to="/login" className={styles.link}>
               Войти
             </Link>
           </p>

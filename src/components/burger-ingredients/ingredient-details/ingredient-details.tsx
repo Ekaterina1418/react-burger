@@ -3,14 +3,17 @@ import styles from './ingredient-details.module.css'
 import PropTypes from 'prop-types'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+
 const IngredientDetails = () => {
-   const { ingredients, loading } = useSelector(
-     (state) => state.ingredients
-   )
+  const { ingredients, loading } = useSelector(
+    (state: any) => state.ingredients
+  )
   const { ingredientId } = useParams()
 
   const ingredient = useMemo(() => {
-    return ingredients.find((ingredient) => ingredient._id === ingredientId)
+    return ingredients.find(
+      (ingredient: any) => ingredient._id === ingredientId
+    )
   }, [ingredients, ingredientId])
   if (!ingredients) {
     return null
@@ -48,7 +51,5 @@ const IngredientDetails = () => {
     </>
   )
 }
-IngredientDetails.propTypes = {
-  ingredient: PropTypes.object,
-}
+
 export default IngredientDetails
