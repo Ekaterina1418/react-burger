@@ -1,0 +1,66 @@
+.wrapper_details_order {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 120px;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+.number_order {
+  composes: text text_type_digits-medium from global;
+  padding-bottom: 40px;
+  text-align: center;
+}
+.name_burger {
+  composes: text text_type_main-medium from global;
+  padding-bottom: 12px;
+}
+.status {
+  color: #00cccc;
+  padding-bottom: 60px;
+}
+.composition {
+  composes: text text_type_main-medium from global;
+  padding-bottom: 28px;
+}
+.container_ingredients {
+  list-style-type: none;
+  composes: text text_type_main-default from global;
+  margin-bottom: 40px;
+  
+}
+.container_ingredients li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.quantity {
+  composes: text_type_digits-default from global;
+}
+.quantity svg {
+    margin-left: 10px;
+}
+.img {
+  display: flex;
+  justify-content: center;
+  border-radius: 100px;
+  border: 2px solid #801ab2;
+  width: 64px;
+  height: 64px;
+}
+.img img {
+  width: 112px;
+  height: 56px;
+}
+.container_date {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.date {
+    composes: text text_type_main-default text_color_inactive from global;
+}

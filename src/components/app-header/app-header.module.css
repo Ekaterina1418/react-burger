@@ -27,6 +27,7 @@
   composes: pr-5 pb-5 pt-5 text_color_inactive from global;
   composes: link;
   text-decoration: none;
+  color:  #8585AD;
   
 }
 
@@ -41,5 +42,13 @@
   text-decoration: none;
 }
 .header_link_account svg {
+  margin-right: 11px;
+}
+.active {
+  color:#FFFFFF;
+  composes: pr-5 pb-5 pt-5 text_color_inactive from global;
+  composes: link;
+}
+.active svg {
   margin-right: 11px;
 }

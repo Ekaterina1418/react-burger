@@ -1,0 +1,33 @@
+.container_info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.sum_orders {
+  margin-top: 60px;
+}
+.info_number {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  flex-wrap: wrap;
+  height: 400px;
+  list-style-type: none;
+  composes: text text_type_digits-default from global;
+}
+.info_number li:not(:last-child) {
+  margin-bottom: 8px;
+}
+.info_number_color {
+  color: #00cccc;
+}
+.title_info {
+  composes: text text_type_main-medium from global;
+  margin-bottom: 24px;
+}
+.title_number {
+  composes: text text_type_main-medium from global;
+}
+.number {
+  composes: text text_type_digits-large from global;
+}

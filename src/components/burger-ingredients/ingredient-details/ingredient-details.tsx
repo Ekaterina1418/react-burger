@@ -2,17 +2,17 @@ import React, { useMemo } from 'react'
 import styles from './ingredient-details.module.css'
 import PropTypes from 'prop-types'
 import { useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector } from '../../../features/store'
 
 const IngredientDetails = () => {
   const { ingredients, loading } = useSelector(
-    (state: any) => state.ingredients
+    (state) => state.ingredients
   )
   const { ingredientId } = useParams()
 
   const ingredient = useMemo(() => {
     return ingredients.find(
-      (ingredient: any) => ingredient._id === ingredientId
+      (ingredient) => ingredient._id === ingredientId
     )
   }, [ingredients, ingredientId])
   if (!ingredients) {

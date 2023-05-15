@@ -8,45 +8,54 @@ import { useDrop } from 'react-dnd'
 import styles from './burger-constructor.module.css'
 import Modal from '../modal/modal'
 import OrderDetails from '../order-details/order-details'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from '../../features/store'
 import {
   removeIngredient,
   addToCart,
   sortingIngredient,
 } from '../../features/cart/cartSlice'
-import { createOrder } from '../../features/order/orderSlice'
+import { Order, createOrder } from '../../features/order/orderSlice'
 import { resetOrder } from '../../features/order/orderSlice'
 import BurgerConstructorItem from './burger-constructor-item'
 import { useNavigate } from 'react-router-dom'
 import { TIngredient } from '../../utils/types'
+import { v4 as uuid } from 'uuid'
+import { RootState } from '../../features/reducer'
+import { number } from 'prop-types'
+
+interface IIndex {
+  toIndex: number
+  fromIndex: number
+}
 
 const BurgerConstructor = () => {
-  const bun = useSelector((state: any) => state.cart.bun)
-  const ingredient = useSelector((state: any) => state.cart.ingredient)
-  const user = useSelector((state: any) => state.user.user)
-  const order = useSelector((state: any) => state.orderes)
+  const bun = useSelector((state) => state.cart.bun)
+  const ingredient = useSelector((state) => state.cart.ingredient)
+  const user = useSelector((state) => state.user.user)
+  const order = useSelector((state) => state.orderes)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  const t = uuid()
+
   const [, dropRef] = useDrop({
     accept: 'ingredient',
-    drop(itemId) {
-      dispatch(addToCart(itemId))
+    drop(ingredient: TIngredient) {
+      dispatch(addToCart({ ...ingredient, id: uuid() }))
     },
   })
 
   const handleMoveItem = ({
     toIndex: hoverIndex,
     fromIndex: dragIndex,
-  }: any) => {
+  }: IIndex) => {
     dispatch(sortingIngredient({ toIndex: hoverIndex, fromIndex: dragIndex }))
   }
 
   const orderClick = () => {
-    const items = ingredient.map((item: any) => item._id)
-    let order = { ingredients: [bun._id, ...items, bun._id] }
+    const items = ingredient.map((item) => item._id)
+    let order = { ingredients: [bun!._id, ...items, bun!._id] }
     if (user && bun !== null) {
-      // @ts-ignore
       dispatch(createOrder(order))
     } else {
       navigate('/login', { replace: true })
@@ -57,7 +66,7 @@ const BurgerConstructor = () => {
     dispatch(resetOrder())
   }
   const total = useMemo(() => {
-    const amountIngredients = ingredient.reduce((acc: number, item: any) => {
+    const amountIngredients = ingredient.reduce((acc: number, item) => {
       acc += item.price * 2
       return acc
     }, 0)
@@ -81,13 +90,12 @@ const BurgerConstructor = () => {
           />
         )}
         {ingredient &&
-          ingredient.map((item: any, index: number) => (
+          ingredient.map((item, index: number) => (
             <BurgerConstructorItem
               ingredient={item}
               key={item.id}
               index={index}
               moveCard={handleMoveItem}
-              // @ts-ignore
               handleClose={(item) => dispatch(removeIngredient(item))}
             />
           ))}
@@ -118,11 +126,17 @@ const BurgerConstructor = () => {
           </Button>
         </>
 
-        {order.loading && <div>загрузка</div>}
+        {order.loading && (
+          <Modal onClose={() => closeModal()} closeOverlay={() => closeModal()}>
+            <div className={styles.wrapper_orders}>
+              <p className={styles.text_loading}>Создание заказа...</p>
+            </div>
+          </Modal>
+        )}
         {!order.loading && order.error && <div>Ошибка</div>}
         {!order.loading && order.order !== null && (
           <Modal onClose={() => closeModal()} closeOverlay={() => closeModal()}>
-            <OrderDetails order={order} />
+            <OrderDetails order={{ order: order.order }} />
           </Modal>
         )}
       </div>

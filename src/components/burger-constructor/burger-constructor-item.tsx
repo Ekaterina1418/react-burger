@@ -5,24 +5,22 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDrag, useDrop } from 'react-dnd'
 import styles from './burger-constructor.module.css'
+import {TConstructorIngredient} from '../../features/cart/cartSlice'
 
 type TIngredientDragType = {
-  id: string
   index: number
 }
-
+ interface IIndex {
+   toIndex: number
+   fromIndex: number
+ }
 interface TIngredientProps extends TIngredientDragType {
-  ingredient: {
-    name: string
-    image: string
-    price: number
-  }
-  handleClose: () => void
-  moveCard: (toIndex: any) => any
+  ingredient: TConstructorIngredient
+  handleClose: (item:string) => void
+  moveCard: (toIndex:IIndex) => void
 }
 const BurgerConstructorItem = ({
   ingredient,
-  id,
   index,
   handleClose,
   moveCard,
@@ -64,7 +62,7 @@ const BurgerConstructorItem = ({
   const [, drag] = useDrag<TIngredientDragType>({
     type: 'sorting',
     item: () => {
-      return { id, index }
+      return { id:ingredient.id, index }
     },
     collect: (monitor) => ({
       isDrag: monitor.isDragging(),
@@ -79,7 +77,7 @@ const BurgerConstructorItem = ({
         thumbnail={ingredient.image}
         text={ingredient.name}
         price={ingredient.price}
-        handleClose={handleClose}
+        handleClose={() => handleClose(ingredient.id)}
         extraClass={styles.wrapper_ingredients}
       />
     </div>

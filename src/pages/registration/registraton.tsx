@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch } from "../../features/store";
 import { registerUser } from '../../features/auth/userSlice'
 import { Link } from 'react-router-dom'
 import styles from './registration.module.css'
@@ -22,7 +22,6 @@ const Registraton = () => {
   }
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()
-    //@ts-ignore
     dispatch(registerUser(form))
     setName('')
     setEmail('')

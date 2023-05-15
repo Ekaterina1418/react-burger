@@ -1,0 +1,29 @@
+.container {
+    display: grid;
+    grid-template-columns: 50% 45%;
+    gap:50px;
+}
+.title {
+    composes: text text_type_main-large from global;
+   margin: 20px 0;
+}
+.order_scroll {
+    height: 952px;
+     overflow-y: scroll;
+     display: flex;
+     flex-direction: column;
+     gap: 10px;
+}
+.order_scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.order_scroll::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+.order_scroll::-webkit-scrollbar-thumb {
+  background: #8585ad;
+}
+.order_info {
+    padding-top: 100px;
+    
+}

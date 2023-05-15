@@ -16,6 +16,7 @@
   line-height: 30px;
   font-weight: 700;
   text-decoration: none;
+  cursor: pointer;
 }
 .links {
   display: flex;
@@ -34,7 +35,7 @@
 .buttons {
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
 }
 .button_save {
   width: 167px;
