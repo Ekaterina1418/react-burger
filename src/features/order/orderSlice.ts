@@ -1,37 +1,39 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { URL_ORDER } from '../../utils/data'
-// export interface Order {
-//   name: string
-//   order: {
-//     number: number
-//   }
-// }
-// export interface orderState {
-//   loading: boolean
-//   order: Order
-//   error: string
-// }
-const initialState = {
+import { ThunkAPI } from '../store'
+export interface Order {
+  name: string
+  order: {
+    number: number
+  }
+  success: boolean
+}
+export interface orderState {
+  loading: boolean
+  order: Order | null
+  error?: string
+}
+const initialState: orderState = {
   loading: false,
   order: null,
-  error: '',
 }
 
 export const createOrder = createAsyncThunk(
   'orderes/fetchOrderes',
-  async (order, { rejectWithValue }) => {
+  async (order:{ingredients:string[]}, { rejectWithValue }) => {
     try {
       const response = await fetch(`${URL_ORDER}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
-        },
+          authorization: localStorage.getItem('accessToken'),
+        } as HeadersInit,
         body: JSON.stringify(order),
       })
       return await response.json()
     } catch (error) {
-      return rejectWithValue(error.message)
+      return rejectWithValue((error as { message: string }).message)
     }
   }
 )

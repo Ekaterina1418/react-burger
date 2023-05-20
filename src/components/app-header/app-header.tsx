@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { JSXElementConstructor, ReactElement } from 'react'
 import { Logo } from '@ya.praktikum/react-developer-burger-ui-components'
 import {
   BurgerIcon,
@@ -6,7 +6,7 @@ import {
   ListIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './app-header.module.css'
-import { NavLink } from 'react-router-dom'
+import { NavLink, NavLinkProps } from 'react-router-dom'
 
 const AppHeader = () => {
   return (
@@ -19,8 +19,7 @@ const AppHeader = () => {
           <NavLink to="/" style={{ textDecoration: 'none' }}>
             {({ isActive }) => (
               <span
-                className={`${styles.header_link_order}`}
-                style={{ color: isActive ? '#FFFFFF' : '#8585AD' }}
+                className={isActive ? styles.active : styles.header_link_order}
               >
                 {isActive ? (
                   <BurgerIcon type="primary" />
@@ -31,11 +30,19 @@ const AppHeader = () => {
               </span>
             )}
           </NavLink>
-          <NavLink to="" style={{ textDecoration: 'none' }}>
-            <span className={`${styles.header_link_order}`}>
-              <ListIcon type="secondary" />
-              Лента заказов
-            </span>
+          <NavLink to="/feed" style={{ textDecoration: 'none' }}>
+            {({ isActive }) => (
+              <span
+                className={isActive ? styles.active : styles.header_link_order}
+              >
+                {isActive ? (
+                  <ListIcon type="primary" />
+                ) : (
+                  <ListIcon type="secondary" />
+                )}
+                Лента заказов
+              </span>
+            )}
           </NavLink>
         </div>
         <div>
@@ -44,8 +51,7 @@ const AppHeader = () => {
         <NavLink to="/profile" style={{ textDecoration: 'none' }}>
           {({ isActive }) => (
             <span
-              className={styles.header_link_account}
-              style={{ color: isActive ? '#FFFFFF' : '#8585AD' }}
+              className={isActive ? styles.active : styles.header_link_account}
             >
               {isActive ? (
                 <ProfileIcon type="primary" />

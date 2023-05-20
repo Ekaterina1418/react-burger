@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch } from '../../features/store'
 import styles from './reset-password.module.css'
-import { resetPassword } from '../../features/auth/userSlice'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import {
   PasswordInput,
   Button,
   Input,
 } from '@ya.praktikum/react-developer-burger-ui-components'
+import { resetPassword } from '../../utils/api'
+import { error } from 'console'
 
 const ResetPassword = () => {
   const [password, setPassword] = useState('')
@@ -26,10 +27,11 @@ const ResetPassword = () => {
   }
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()
-    //@ts-ignore
-    dispatch(resetPassword(form, { onSuccess: () => navigate('/login') }))
-    navigate('/login', { replace: true })
+    resetPassword(form)
+      .then(() => navigate('/login', { replace: true }))
+      .catch((error) => console.log(error.message))
   }
+
   return (
     <>
       <div className={styles.wrap}>

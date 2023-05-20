@@ -3,8 +3,9 @@ import styles from './burger-ingredients.module.css'
 import { TIngredient } from '../../utils/types'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientItem from './ingredient-item/ingredient-item'
-import { useSelector } from 'react-redux'
 import { number } from 'prop-types'
+import {useSelector} from "../../features/store";
+
 
 const BurgerIngredients = () => {
   const [current, setCurrent] = useState('булки')
@@ -37,13 +38,13 @@ const BurgerIngredients = () => {
       setCurrent('начинки')
     }
   }
-  const ingredients = useSelector((store: any) => store.ingredients.ingredients)
-  const buns = ingredients.filter((item: any) => item.type === 'bun')
-  const sauces = ingredients.filter((item: any) => item.type === 'sauce')
-  const mains = ingredients.filter((item: any) => item.type === 'main')
-  const bun = useSelector((state: any) => state.cart.bun)
+  const ingredients = useSelector((store) => store.ingredients.ingredients)
+  const buns = ingredients.filter((item) => item.type === 'bun')
+  const sauces = ingredients.filter((item) => item.type === 'sauce')
+  const mains = ingredients.filter((item) => item.type === 'main')
+  const bun = useSelector((state) => state.cart.bun)
   const ingredientsConstructor = useSelector(
-    (state: any) => state.cart.ingredient
+    (state) => state.cart.ingredient
   )
 
   const bunStatistics = useMemo(() => {
@@ -52,7 +53,7 @@ const BurgerIngredients = () => {
       return res
     }
 
-    buns.forEach((b: any) => {
+    buns.forEach((b) => {  
       const count = bun && b._id === bun._id ? 2 : 0
       res.set(b._id, count)
     })
@@ -67,10 +68,10 @@ const BurgerIngredients = () => {
     }
 
     const items = ingredientsConstructor.filter(
-      (el: any) => el.type === 'sauce'
+      (el) => el.type === 'sauce'
     )
     return items.reduce(
-      (acc: any, e: any) => acc.set(e._id, (acc.get(e._id) || 0) + 1),
+      (acc, e) => acc.set(e._id, (acc.get(e._id) || 0) + 1),
       res
     )
   }, [sauces, ingredients])
@@ -81,9 +82,9 @@ const BurgerIngredients = () => {
       return res
     }
 
-    const items = ingredientsConstructor.filter((el: any) => el.type === 'main')
+    const items = ingredientsConstructor.filter((el) => el.type === 'main')
     return items.reduce(
-      (acc: any, e: any) => acc.set(e._id, (acc.get(e._id) || 0) + 1),
+      (acc, e) => acc.set(e._id, (acc.get(e._id) || 0) + 1),
       res
     )
   }, [mains, ingredients])
@@ -118,7 +119,7 @@ const BurgerIngredients = () => {
           <div
             className={`${styles.burger_ingredient} ${styles.burger_ingredient_pb}`}
           >
-            {buns.map((item: any) => {
+            {buns.map((item) => {
               return (
                 <IngredientItem
                   key={item._id}
@@ -132,7 +133,7 @@ const BurgerIngredients = () => {
             Соусы
           </h2>
           <div className={styles.burger_ingredient}>
-            {sauces.map((item: any) => {
+            {sauces.map((item) => {
               return (
                 <IngredientItem
                   key={item._id}
@@ -146,7 +147,7 @@ const BurgerIngredients = () => {
             Начинки
           </h2>
           <div className={styles.burger_ingredient}>
-            {mains.map((item: any) => {
+            {mains.map((item) => {
               return (
                 <IngredientItem
                   key={item._id}

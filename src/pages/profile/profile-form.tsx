@@ -6,13 +6,13 @@ import {
   PasswordInput,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from "../../features/store";
 import { userUpdate } from '../../features/auth/userSlice'
 const ProfileForm = () => {
-  const user = useSelector((state:any) => state.user.user)
+  const user = useSelector((state) => state.user.user)
   const dispatch = useDispatch()
-  const [name, setName] = useState(user.name)
-  const [email, setEmail] = useState(user.email)
+  const [name, setName] = useState(user?.name ?? '')
+  const [email, setEmail] = useState(user?.email ?? '')
   const [password, setPassword] = useState('')
   const form = {
     name: name,
@@ -21,12 +21,11 @@ const ProfileForm = () => {
   }
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()
-  //@ts-ignore
     dispatch(userUpdate(form))
   }
   const userCancel = () => {
-    setName(user.name)
-    setEmail(user.email)
+    setName(user?.name ?? '')
+    setEmail(user?.email ?? '')
   }
   return (
     <form className={styles.form_profile} onSubmit={handleSubmit}>
@@ -54,7 +53,7 @@ const ProfileForm = () => {
         name={'password'}
         icon="EditIcon"
       />
-      {name !== user.name && email !== user.email && (
+      {name !== user?.name && email !== user?.email && (
         <div className={styles.buttons}>
           <Button  className={styles.cancel} onClick={() => userCancel()} htmlType='reset'>
             Отмена

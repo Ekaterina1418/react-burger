@@ -3,12 +3,13 @@
   margin: auto;
   display: flex;
   gap: 68px;
-  padding-top: 120px;
 }
+
 .form_profile {
   display: flex;
   flex-direction: column;
   gap: 24px;
+   padding-top: 120px;
 }
 .category {
   composes: text text_type_main-default text_color_inactive from global;
@@ -16,11 +17,13 @@
   line-height: 30px;
   font-weight: 700;
   text-decoration: none;
+  cursor: pointer;
 }
 .links {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  padding-top: 120px;
 }
 
 .active {
@@ -34,7 +37,7 @@
 .buttons {
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
 }
 .button_save {
   width: 167px;
@@ -46,3 +49,4 @@
   background: transparent;
   border: none;
 }
+

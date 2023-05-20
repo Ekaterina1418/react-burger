@@ -1,6 +1,7 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector } from '../features/store'
 import { useLocation, Navigate } from 'react-router-dom'
+
 
 interface ProtectedRouteProps {
   onlyUnAuth?: boolean
@@ -11,8 +12,8 @@ const ProtectedRoute = ({
   onlyUnAuth = false,
   component,
 }: ProtectedRouteProps) => {
-  const isAuthChecked = useSelector((state: any) => state.user.isAuthChecked)
-  const user = useSelector((state: any) => state.user.user)
+  const isAuthChecked = useSelector((state) => state.user.isAuthChecked)
+  const user = useSelector((state) => state.user.user)
   const location = useLocation()
 
   if (!isAuthChecked) {

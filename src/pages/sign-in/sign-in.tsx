@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from "../../features/store";
 import { login } from '../../features/auth/userSlice'
 import { Link } from 'react-router-dom'
 import styles from './sign-in.module.css'
@@ -19,7 +19,6 @@ const SignIn = () => {
   }
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()
-    //@ts-ignore
     dispatch(login(form))
   }
 

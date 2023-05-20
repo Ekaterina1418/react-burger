@@ -1,12 +1,11 @@
 import React from 'react'
 import styles from './profile.module.css'
 import { NavLink, Outlet } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch } from '../../features/store'
 import { logout } from '../../features/auth/userSlice'
 const Profile = () => {
   const dispatch = useDispatch()
   const handleLogout = () => {
-    //@ts-ignore
     dispatch(logout())
   }
   return (
@@ -30,7 +29,7 @@ const Profile = () => {
           >
             История заказов
           </NavLink>
-          <p className={styles.category} onClick={() => handleLogout}>
+          <p className={styles.category} onClick={()=> handleLogout()}>
             Выход
           </p>
           <p className="text text_type_main-default text_color_inactive">

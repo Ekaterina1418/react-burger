@@ -1,7 +1,13 @@
 import React, { useEffect } from 'react'
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
+import {
+  Routes,
+  Route,
+  useLocation,
+  useNavigate,
+  useNavigationType,
+} from 'react-router-dom'
 import * as H from 'history'
-import { useDispatch } from 'react-redux'
+import { useDispatch } from '../features/store'
 import '../App.css'
 import { fetchIngredients } from '../features/api/apiSlice'
 import ConstructorPage from '../pages/constroctor/constructor-page'
@@ -11,7 +17,7 @@ import ForgotPassword from '../pages/forgot-password/forgot-password'
 import ResetPassword from '../pages/reset-password/reset-password'
 import Profile from '../pages/profile/profile'
 import IngredientDetails from './burger-ingredients/ingredient-details/ingredient-details'
-import Orders from '../pages/profile/orders'
+import Orders from '../pages/profile/history-orders'
 import ProfileForm from '../pages/profile/profile-form'
 import IngredientInfo from '../pages/ingredient-info/ingredient-info'
 import Modal from './modal/modal'
@@ -19,14 +25,18 @@ import { OnlyAuth, OnlyUnAuth } from './protected-route'
 import { checkUserAuth } from '../features/auth/userSlice'
 import Layout from './Layout'
 import Page404 from '../pages/404/Page404'
+import OrderFeed from '../pages/feed/order-feed'
+import PageItemFeed from '../pages/page-item-feed/page-item-feed'
+import ItemFeed from './item-feed/item-feed'
+import PageHistoryOrder from '../pages/page-history-order/page-history-order'
+import HistoryOrderItem from './history-order-item/history-order-item'
+import HistoryOrders from '../pages/profile/history-orders'
 
 function App() {
   const dispatch = useDispatch()
-
+  const navigationType = useNavigationType()
   useEffect(() => {
-    //@ts-ignore
     dispatch(checkUserAuth())
-    //@ts-ignore
     dispatch(fetchIngredients())
   }, [dispatch])
 
@@ -62,10 +72,19 @@ function App() {
             path="/reset-password"
             element={<OnlyUnAuth component={<ResetPassword />} />}
           />
+          <Route path="/feed" element={<OrderFeed />} />
+          <Route
+            path="/feed/:number"
+            element={<OnlyAuth component={<PageItemFeed />} />}
+          />
+          <Route
+            path="/profile/orders/:number"
+            element={<OnlyAuth component={<PageHistoryOrder />} />}
+          />
           <Route path="*" element={<Page404 />} />
           <Route path="/profile" element={<OnlyAuth component={<Profile />} />}>
             <Route index element={<ProfileForm />} />
-            <Route path="/profile/orders" element={<Orders />} />
+            <Route path="/profile/orders" element={<HistoryOrders />} />
           </Route>
         </Route>
       </Routes>
@@ -81,6 +100,31 @@ function App() {
                 title="Детали ингредиента"
               >
                 <IngredientDetails />
+              </Modal>
+            }
+          />
+        </Routes>
+      )}
+      {navigationType === 'PUSH' && (
+        <Routes>
+          <Route
+            path="/feed/:number"
+            element={
+              <Modal onClose={handleModalClose} closeOverlay={handleModalClose}>
+                <ItemFeed />
+              </Modal>
+            }
+          />
+        </Routes>
+      )}
+
+      {navigationType === 'PUSH' && (
+        <Routes>
+          <Route
+            path="/profile/orders/:number"
+            element={
+              <Modal onClose={handleModalClose} closeOverlay={handleModalClose}>
+                <ItemFeed />
               </Modal>
             }
           />
