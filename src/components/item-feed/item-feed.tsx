@@ -13,6 +13,7 @@ import { getOrder } from '../../features/details-order/detailsOrderSlice'
 import { TOrderInfo } from '../../utils/types'
 import { object } from 'prop-types'
 import { access } from 'fs'
+import OrderDetails from '../order-details/order-details'
 interface IResult {
   id: string
   image: string
@@ -73,24 +74,24 @@ const ItemFeed = () => {
             acc[el] = (acc[el] || 0) + 1
             return acc
           }, result)
-            for (const [key, value] of Object.entries(result)) {
-                if (key === item._id) {
-                  return res.push({
-                  id: item._id,
-                  image: item.image_mobile,
-                  name: item.name,
-                  price: item.price,
-                  quantity: value as number,
-                })
-              }
-            }
-        }
-
       
+          for (const [key, value] of Object.entries(result)) {
+            if (key === item._id) {
+              return res.push({
+                id: item._id,
+                image: item.image_mobile,
+                name: item.name,
+                price: item.price,
+                quantity: value as number,
+              })
+            }
+          }
+        }
       })
     }
     return res
-  }, [orders, ingredients, order])
+  }, [ingredients,itemDetails])
+
 
   return (
     <>
@@ -120,7 +121,7 @@ const ItemFeed = () => {
                         <p className={styles.ingredient_name}>{item.name}</p>
                       </div>
                       <p className={styles.quantity}>
-                        {item.quantity} X {item.price}{' '}
+                        {item.quantity} X {item.price}
                         <CurrencyIcon type="primary" />
                       </p>
                     </li>
@@ -134,7 +135,7 @@ const ItemFeed = () => {
                 className={styles.date}
               />
               <p className={styles.quantity}>
-                500 <CurrencyIcon type="primary" />
+               500 <CurrencyIcon type="primary" />
               </p>
             </div>
           </div>
