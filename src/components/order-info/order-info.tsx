@@ -6,7 +6,7 @@ import { TOrdersResponse } from '../../utils/types'
 interface IOrdersInfoProps {
   orders: TOrdersResponse
 }
-const OrderInfo = ({ orders }: IOrdersInfoProps ) => {
+const OrderInfo = ({ orders }: IOrdersInfoProps) => {
   return (
     <div>
       <div className={styles.container_info}>

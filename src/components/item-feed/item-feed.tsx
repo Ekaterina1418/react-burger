@@ -43,55 +43,50 @@ const ItemFeed = () => {
     }
   }, [dispatch])
 
+  const quantityIngredients = useMemo(() => {
+    let result = {} as any
+    if (itemDetails) {
+      itemDetails.ingredients.reduce((acc, el) => {
+        acc[el] = (acc[el] || 0) + 1
+        return acc
+      }, result)
+
+      return result
+    }
+  }, [itemDetails])
+
+  const uniqueId =
+    itemDetails &&
+    itemDetails?.ingredients.filter(
+      (item, index, numbers) => numbers.indexOf(item) === index
+    )
+
   const orderDetails = useMemo(() => {
     let res: Array<IResult> = []
-    let result = {} as any
-    if (orders && ingredients) {
+    uniqueId?.map((elem) => {
       ingredients.map((item) => {
-        if (itemDetails) {
-          itemDetails.ingredients.reduce((acc, el) => {
-            acc[el] = (acc[el] || 1) + 1
-            return acc
-          }, result)
-          for (const [key, value] of Object.entries(result)) {
-            if (key === item._id) {
-              return res.push({
-                id: item._id,
-                image: item.image_mobile,
-                name: item.name,
-                price: item.price,
-                quantity: value as number,
-              })
-            }
-          }
+        if (item._id === elem) {
+          return res.push({
+            id: item._id,
+            image: item.image_mobile,
+            name: item.name,
+            price: item.price,
+            quantity: quantityIngredients[item._id],
+          })
         }
       })
-    }
-    if (orders === null) {
-      ingredients.map((item) => {
-        if (itemDetails) {
-          itemDetails.ingredients.reduce((acc, el) => {
-            acc[el] = (acc[el] || 0) + 1
-            return acc
-          }, result)
-      
-          for (const [key, value] of Object.entries(result)) {
-            if (key === item._id) {
-              return res.push({
-                id: item._id,
-                image: item.image_mobile,
-                name: item.name,
-                price: item.price,
-                quantity: value as number,
-              })
-            }
-          }
-        }
-      })
-    }
-    return res
-  }, [ingredients,itemDetails])
+    })
 
+    return res
+  }, [ingredients, uniqueId])
+
+  const total = useMemo(() => {
+    const amount = orderDetails.reduce((acc, el) => {
+      acc += el.price * el.quantity
+      return acc
+    }, 0)
+    return amount
+  }, [orderDetails])
 
   return (
     <>
@@ -120,6 +115,7 @@ const ItemFeed = () => {
                         </div>
                         <p className={styles.ingredient_name}>{item.name}</p>
                       </div>
+
                       <p className={styles.quantity}>
                         {item.quantity} X {item.price}
                         <CurrencyIcon type="primary" />
@@ -135,7 +131,8 @@ const ItemFeed = () => {
                 className={styles.date}
               />
               <p className={styles.quantity}>
-               500 <CurrencyIcon type="primary" />
+                {total}
+                <CurrencyIcon type="primary" />
               </p>
             </div>
           </div>
