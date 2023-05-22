@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect, useState } from 'react'
 import styles from './item-feed.module.css'
-import { useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from '../../features/store'
 import {
   CurrencyIcon,

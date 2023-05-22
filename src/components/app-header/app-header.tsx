@@ -15,8 +15,8 @@ const AppHeader = () => {
         className={`${styles.header_wrapper} wrapper
       `}
       >
-        <div style={{ display: 'flex' }}>
-          <NavLink to="/" style={{ textDecoration: 'none' }}>
+        <div className={styles.container_header} id="nav">
+          <NavLink to="/" className={styles.decoration}>
             {({ isActive }) => (
               <span
                 className={isActive ? styles.active : styles.header_link_order}
@@ -30,7 +30,7 @@ const AppHeader = () => {
               </span>
             )}
           </NavLink>
-          <NavLink to="/feed" style={{ textDecoration: 'none' }}>
+          <NavLink to="/feed" className={styles.decoration}>
             {({ isActive }) => (
               <span
                 className={isActive ? styles.active : styles.header_link_order}
@@ -48,7 +48,7 @@ const AppHeader = () => {
         <div>
           <Logo />
         </div>
-        <NavLink to="/profile" style={{ textDecoration: 'none' }}>
+        <NavLink to="/profile" className={styles.decoration}>
           {({ isActive }) => (
             <span
               className={isActive ? styles.active : styles.header_link_account}

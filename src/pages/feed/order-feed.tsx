@@ -29,7 +29,7 @@ const OrderFeed = () => {
           <h1 className={styles.title}>Лента заказов</h1>
           <div className={`${styles.order_scroll} custom-scroll`}>
             {orders.orders &&
-              orders.orders.map((item) => { 
+              orders.orders.map((item) => {
                 return <CardOrder key={item._id} orderdetails={item} />
               })}
           </div>

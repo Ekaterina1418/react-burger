@@ -1,14 +1,14 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
-import { URL } from '../../utils/data'
+import { BASE_URL } from '../../utils/data'
 import { TIngredient } from '../../utils/types'
 
 export const fetchIngredients = createAsyncThunk(
   'ingredients/fetchIngredients',
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get(URL)
+      const response = await axios.get(`${BASE_URL}/ingredients`)
       return response.data.data
     } catch (error:any) {
       return thunkAPI.rejectWithValue(error.message)

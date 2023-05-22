@@ -75,7 +75,7 @@ function App() {
           <Route path="/feed" element={<OrderFeed />} />
           <Route
             path="/feed/:number"
-            element={<OnlyAuth component={<PageItemFeed />} />}
+            element={<OnlyUnAuth component={<PageItemFeed />} />}
           />
           <Route
             path="/profile/orders/:number"
@@ -84,7 +84,7 @@ function App() {
           <Route path="*" element={<Page404 />} />
           <Route path="/profile" element={<OnlyAuth component={<Profile />} />}>
             <Route index element={<ProfileForm />} />
-            <Route path="/profile/orders" element={<HistoryOrders />} />
+            <Route path="orders" element={<HistoryOrders />} />
           </Route>
         </Route>
       </Routes>
@@ -105,7 +105,8 @@ function App() {
           />
         </Routes>
       )}
-      {navigationType === 'PUSH' && (
+      
+      {background && navigationType === 'PUSH' && (
         <Routes>
           <Route
             path="/feed/:number"
@@ -118,7 +119,7 @@ function App() {
         </Routes>
       )}
 
-      {navigationType === 'PUSH' && (
+      {background && navigationType === 'PUSH' && (
         <Routes>
           <Route
             path="/profile/orders/:number"

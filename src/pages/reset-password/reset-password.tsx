@@ -25,7 +25,7 @@ const ResetPassword = () => {
     password: password,
     token: token,
   }
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     resetPassword(form)
       .then(() => navigate('/login', { replace: true }))
@@ -33,9 +33,9 @@ const ResetPassword = () => {
   }
 
   return (
-    <>
+  
       <div className={styles.wrap}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+        <div className={styles.container_reset_password}>
           <h3 className={styles.title}>Восстановление пароля</h3>
           <form onSubmit={handleSubmit} className={styles.form}>
             <PasswordInput
@@ -70,7 +70,7 @@ const ResetPassword = () => {
           </p>
         </div>
       </div>
-    </>
+  
   )
 }
 

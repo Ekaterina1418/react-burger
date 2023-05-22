@@ -55,7 +55,7 @@ const HistoryOrderItem = ({ historyOrder }: IHistoryOrderProps) => {
           </div>
           <h4 className={styles.name_burger}>{historyOrder.name}</h4>
           {historyOrder.status === 'done' && (
-            <p style={{ color: '#00CCCC' }} className={styles.status}>
+            <p  className={styles.status}>
               Выполнен
             </p>
           )}

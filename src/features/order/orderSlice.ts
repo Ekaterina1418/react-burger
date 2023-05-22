@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { URL_ORDER } from '../../utils/data'
+import { BASE_URL } from '../../utils/data'
 import { ThunkAPI } from '../store'
 export interface Order {
   name: string
@@ -23,7 +23,7 @@ export const createOrder = createAsyncThunk(
   'orderes/fetchOrderes',
   async (order:{ingredients:string[]}, { rejectWithValue }) => {
     try {
-      const response = await fetch(`${URL_ORDER}`, {
+      const response = await fetch(`${BASE_URL}/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',

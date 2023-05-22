@@ -7,6 +7,10 @@
   font-weight: 700;
   composes: text text_type_main-large pb-5 from global;
 }
+.container_tab {
+  display: flex;
+  padding-bottom: 40px;
+}
 .burger_ingredient_name {
   composes: text text_type_main-medium from global;
   font-family: 'JetBrainsMono', Arial, sans-serif;

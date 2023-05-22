@@ -93,7 +93,7 @@ const BurgerIngredients = () => {
       <div className={styles.burger_ingredients_wrapper}>
         <h1 className={styles.burger_ingredients_title}>Соберите бургер</h1>
 
-        <div style={{ display: 'flex', paddingBottom: '40px' }} ref={refTabs}>
+        <div className={styles.container_tab} ref={refTabs}>
           <Tab value="булки" active={current === 'булки'} onClick={setCurrent}>
             Булки
           </Tab>
