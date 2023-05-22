@@ -5,16 +5,12 @@ import BurgerConstructor from '../../components/burger-constructor/burger-constr
 import BurgerIngredients from '../../components/burger-ingredients/burger-ingredients'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
-import {useLocation} from 'react-router'
-
-
 
 const ConstructorPage = () => {
-   const { ingredients, loading, error } = useSelector(
-     (state) => state.ingredients
-   )
-  const location = useLocation()
-  console.log(location)
+  const { ingredients, loading, error } = useSelector(
+    (state) => state.ingredients
+  )
+
   return (
     <>
       <DndProvider backend={HTML5Backend}>
@@ -24,7 +20,7 @@ const ConstructorPage = () => {
             {!loading && error && <div>{error}</div>}
             {!loading && ingredients !== null && (
               <>
-                <BurgerIngredients  />
+                <BurgerIngredients />
                 <BurgerConstructor />
               </>
             )}

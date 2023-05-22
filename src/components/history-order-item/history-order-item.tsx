@@ -1,21 +1,21 @@
-import React, {useMemo} from 'react'
+import React, { useMemo } from 'react'
 import { TOrderInfo } from '../../utils/types'
-import {useSelector} from '../../features/store'
-import { Link } from 'react-router-dom'
+import { useSelector } from '../../features/store'
+import { Link, useLocation } from 'react-router-dom'
 import styles from './history-order-item.module.css'
 import {
   FormattedDate,
   CurrencyIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
- interface IHistoryOrderProps {
-   historyOrder: TOrderInfo
- }
+interface IHistoryOrderProps {
+  historyOrder: TOrderInfo
+}
 
 const HistoryOrderItem = ({ historyOrder }: IHistoryOrderProps) => {
   const dateFromServer = historyOrder.updatedAt
   const ingredients = useSelector((store) => store.ingredients.ingredients)
   const number = historyOrder['number']
-
+  const location = useLocation()
   const socketImage = useMemo(() => {
     let res: Array<string> = []
     ingredients.map((item) => {
@@ -43,7 +43,11 @@ const HistoryOrderItem = ({ historyOrder }: IHistoryOrderProps) => {
   }, [historyOrder.ingredients])
 
   return (
-    <Link to={`/profile/orders/${number}`} className={styles.link}>
+    <Link
+      to={`/profile/orders/${number}`}
+      className={styles.link}
+      state={{ background: location }}
+    >
       {historyOrder && (
         <div className={styles.wrapper_card}>
           <div className={styles.service_info}>
@@ -55,9 +59,7 @@ const HistoryOrderItem = ({ historyOrder }: IHistoryOrderProps) => {
           </div>
           <h4 className={styles.name_burger}>{historyOrder.name}</h4>
           {historyOrder.status === 'done' && (
-            <p  className={styles.status}>
-              Выполнен
-            </p>
+            <p className={styles.status}>Выполнен</p>
           )}
           {historyOrder.status === 'created' && (
             <p className={styles.status}>Создан</p>

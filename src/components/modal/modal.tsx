@@ -22,6 +22,7 @@ const Modal = ({
   const closeModal = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
       setClose(false)
+      onClose()
     }
   }
   useEffect(() => {

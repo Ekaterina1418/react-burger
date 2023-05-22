@@ -84,7 +84,7 @@ function App() {
           <Route path="*" element={<Page404 />} />
           <Route path="/profile" element={<OnlyAuth component={<Profile />} />}>
             <Route index element={<ProfileForm />} />
-            <Route path="orders" element={<HistoryOrders />} />
+            <Route path="/profile/orders" element={<HistoryOrders />} />
           </Route>
         </Route>
       </Routes>
@@ -105,7 +105,7 @@ function App() {
           />
         </Routes>
       )}
-      
+
       {background && navigationType === 'PUSH' && (
         <Routes>
           <Route
