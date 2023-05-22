@@ -5,6 +5,7 @@ import {
   useLocation,
   useNavigate,
   useNavigationType,
+  useMatch,
 } from 'react-router-dom'
 import * as H from 'history'
 import { useDispatch } from '../features/store'
@@ -42,11 +43,18 @@ function App() {
 
   const navigate = useNavigate()
   const location = useLocation()
-  const background =
+  const isFeedItem = useMatch('/feed/:number')
+  const isHistoryOrder = useMatch('/profile/orders/:number')
+  let background: H.Location | undefined =
     (location.state as { background?: H.Location }) && location.state.background
   const handleModalClose = (): void => {
     navigate(-1)
   }
+
+  if (navigationType !== 'PUSH' && (isFeedItem || isHistoryOrder)) {
+    background = undefined
+  }
+
   return (
     <>
       <Routes location={background || location}>
@@ -73,10 +81,7 @@ function App() {
             element={<OnlyUnAuth component={<ResetPassword />} />}
           />
           <Route path="/feed" element={<OrderFeed />} />
-          <Route
-            path="/feed/:number"
-            element={<OnlyUnAuth component={<PageItemFeed />} />}
-          />
+          <Route path="/feed/:number" element={<PageItemFeed />} />
           <Route
             path="/profile/orders/:number"
             element={<OnlyAuth component={<PageHistoryOrder />} />}

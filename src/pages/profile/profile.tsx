@@ -22,7 +22,7 @@ const Profile = () => {
           Профиль
         </NavLink>
         <NavLink
-          to="/profile/orders"
+          to="orders"
           className={({ isActive }) =>
             isActive ? `${styles.active}` : `${styles.category}`
           }

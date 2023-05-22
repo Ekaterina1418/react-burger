@@ -27,6 +27,7 @@ const ItemFeed = () => {
   const { orders, status } = useSelector((state) => state.feed)
   const ingredients = useSelector((state) => state.ingredients.ingredients)
   const order = useSelector((state) => state.order)
+  const profileFeed = useSelector((state) => state.profileFeed.orders)
   const { number } = useParams()
 
   const itemDetails = useMemo(() => {
@@ -34,6 +35,8 @@ const ItemFeed = () => {
       return orders.orders.find((item) => item.number === Number(number))
     } else if (order !== null) {
       return order.orders.find((item) => item.number === Number(number))
+    } else if (profileFeed !== null) {
+      return profileFeed.orders.find((item) => item.number === Number(number))
     }
   }, [orders, order, number])
 
