@@ -31,6 +31,7 @@
   display: grid;
   grid-template-columns: repeat(6, 50px);
 }
+
 .ingredient {
   background: #131316;
   display: flex;
@@ -41,9 +42,13 @@
   width: 64px;
   height: 64px;
 }
+
 .ingredient img {
   width: 112px;
   height: 56px;
+}
+.ingredient:nth-child(6) {
+  opacity: 0.6;
 }
 .container_price {
   display: flex;
@@ -58,4 +63,11 @@
 .link {
   text-decoration: none;
   color: #ffffff;
+}
+.plus {
+  composes: text text_type_digits-default from global;
+  position: relative;
+  display: flex;
+  right: 74px;
+  top: 20px;
 }

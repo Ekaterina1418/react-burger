@@ -17,11 +17,12 @@ const CardOrder = ({ orderdetails }: IOrderDetailsProps) => {
   const location = useLocation()
   const number = orderdetails['number']
   const ingredients = useSelector((store) => store.ingredients.ingredients)
-
+  const odds = orderdetails.ingredients.length - 5
   const socketImage = useMemo(() => {
     let res: Array<string> = []
+    let result = orderdetails.ingredients.slice(0, 6)
     ingredients.map((item) => {
-      orderdetails.ingredients.map((el) => {
+      result.map((el) => {
         if (el === item._id) {
           return res.push(item.image_mobile)
         }
@@ -62,14 +63,20 @@ const CardOrder = ({ orderdetails }: IOrderDetailsProps) => {
           <h4 className={styles.name_burger}>{orderdetails.name}</h4>
           <div className={styles.container_ingredients}>
             <ul className={styles.img_ingredients}>
-              {socketImage.map((item, id) => {
+              {socketImage.map((item, index) => {
                 return (
-                  <li className={styles.ingredient} key={id}>
+                  <li className={styles.ingredient} key={index}>
                     <img src={item} alt="ингредиенты" />
                   </li>
                 )
               })}
             </ul>
+            {socketImage.length > 5 && (
+              <div className={styles.plus} key={socketImage.length - 1}>
+                {` +${odds}`}
+              </div>
+            )}
+
             <div className={styles.container_price}>
               <p className={styles.price}>{total}</p>
               <CurrencyIcon type="primary" />
