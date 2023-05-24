@@ -68,6 +68,6 @@
   composes: text text_type_digits-default from global;
   position: relative;
   display: flex;
-  right: 74px;
+  right:17%;
   top: 20px;
 }
