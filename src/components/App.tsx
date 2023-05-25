@@ -47,6 +47,7 @@ function App() {
   const isHistoryOrder = useMatch('/profile/orders/:number')
   let background: H.Location | undefined =
     (location.state as { background?: H.Location }) && location.state.background
+    
   const handleModalClose = (): void => {
     navigate(-1)
   }

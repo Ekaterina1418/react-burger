@@ -19,6 +19,7 @@ const Modal = ({
   closeOverlay,
 }: TModalProps): JSX.Element => {
   const [close, setClose] = useState<boolean>(true)
+  
   const closeModal = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
       setClose(false)
