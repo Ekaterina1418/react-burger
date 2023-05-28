@@ -12,16 +12,17 @@ export interface Order {
 export interface orderState {
   loading: boolean
   order: Order | null
-  error?: string
+  error: string | null
 }
-const initialState: orderState = {
+ export const initialState: orderState = {
   loading: false,
   order: null,
+  error: null
 }
 
 export const createOrder = createAsyncThunk(
   'orderes/fetchOrderes',
-  async (order:{ingredients:string[]}, { rejectWithValue }) => {
+  async (order: { ingredients: string[] }, { rejectWithValue }) => {
     try {
       const response = await fetch(`${BASE_URL}/orders`, {
         method: 'POST',
@@ -33,7 +34,7 @@ export const createOrder = createAsyncThunk(
       })
       return await response.json()
     } catch (error) {
-      return rejectWithValue((error as { message: string }).message)
+    return rejectWithValue((error as { message: string }).message)
     }
   }
 )
@@ -55,11 +56,14 @@ const orderSlice = createSlice({
       state.order = action.payload
       state.error = ''
     })
-    builder.addCase(createOrder.rejected, (state, action) => {
-      state.loading = false
-      state.order = null
-      state.error = action.error.message
-    })
+    builder.addCase(
+      createOrder.rejected,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false
+        state.order = null
+        state.error = action.payload
+      }
+    )
   },
 })
 

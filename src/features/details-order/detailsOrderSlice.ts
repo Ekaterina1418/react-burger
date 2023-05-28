@@ -36,7 +36,7 @@ export interface detailsOrderStore {
   error?: string
 }
 
-const initialState: detailsOrderStore = {
+export const initialState: detailsOrderStore = {
   loading: false,
   orders: [],
 }
