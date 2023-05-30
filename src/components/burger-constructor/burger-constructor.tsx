@@ -22,6 +22,7 @@ import { TIngredient } from '../../utils/types'
 import { v4 as uuid } from 'uuid'
 import { RootState } from '../../features/reducer'
 import { number } from 'prop-types'
+import BurgerConstructorBackground from './burger-constructor-background'
 
 interface IIndex {
   toIndex: number
@@ -77,70 +78,89 @@ const BurgerConstructor = () => {
   }, [ingredient, bun])
 
   return (
-    <div className={styles.burger_constructor_wrapper} ref={dropRef}>
-      <div className={styles.burger_constructor_lists}>
-        {bun && (
-          <ConstructorElement
-            type="top"
-            isLocked={true}
-            text={`${bun.name} (верх)`}
-            price={bun.price}
-            thumbnail={bun.image}
-            extraClass={styles.wrapper_ingreients}
-          />
-        )}
-        {ingredient &&
-          ingredient.map((item, index: number) => (
-            <BurgerConstructorItem
-              ingredient={item}
-              key={item.id}
-              index={index}
-              moveCard={handleMoveItem}
-              handleClose={(item) => dispatch(removeIngredient(item))}
-            />
-          ))}
-        {bun && (
-          <ConstructorElement
-            type="bottom"
-            isLocked={true}
-            text={`${bun.name} (низ)`}
-            price={bun.price}
-            thumbnail={bun.image}
-            extraClass={styles.burger_constructor_bottom}
-          />
-        )}
-      </div>
-      <div className={styles.burger_constructor_sum}>
-        <>
-          <p className="text text_type_main-large">
-            {total}
-            <CurrencyIcon type="primary" />
-          </p>
-          <Button
-            onClick={() => orderClick()}
-            htmlType="button"
-            type="primary"
-            size="large"
-          >
-            Оформить заказ
-          </Button>
-        </>
-
-        {order.loading && (
-          <Modal onClose={() => closeModal()} closeOverlay={() => closeModal()}>
-            <div className={styles.wrapper_orders}>
-              <p className={styles.text_loading}>Создание заказа...</p>
+    <>
+      <div
+        className={styles.burger_constructor_wrapper}
+        data-test="constructor"
+        ref={dropRef}
+      >
+        <div className={styles.burger_constructor_lists}>
+       
+          {bun && (
+            <div data-test="top_bun">
+              <ConstructorElement
+                type="top"
+                isLocked={true}
+                text={`${bun.name} (верх)`}
+                price={bun.price}
+                thumbnail={bun.image}
+                extraClass={styles.wrapper_ingreients}
+              />
             </div>
-          </Modal>
-        )}
-        {!order.loading && order.error && <div>Ошибка</div>}
-        {!order.loading && order.order !== null && (
-          <Modal onClose={() => closeModal()} closeOverlay={() => closeModal()}>
-            <OrderDetails order={{ order: order.order }} />
-          </Modal>
-        )}
+          )}
+          {ingredient &&
+            ingredient.map((item, index: number) => (
+              <div data-test="ingredient" key={item.id}>
+                <BurgerConstructorItem
+                  ingredient={item}
+                  key={item.id}
+                  index={index}
+                  moveCard={handleMoveItem}
+                  handleClose={(item) => dispatch(removeIngredient(item))}
+                />
+              </div>
+            ))}
+          {bun && (
+            <div data-test="bottom_bun">
+              <ConstructorElement
+                type="bottom"
+                isLocked={true}
+                text={`${bun.name} (низ)`}
+                price={bun.price}
+                thumbnail={bun.image}
+                extraClass={styles.burger_constructor_bottom}
+              />
+            </div>
+          )}
+        </div>
+        <div className={styles.burger_constructor_sum}>
+          <>
+            <p className="text text_type_main-large">
+              {total}
+              <CurrencyIcon type="primary" />
+            </p>
+            <Button
+              onClick={() => orderClick()}
+              htmlType="button"
+              type="primary"
+              size="large"
+            >
+              Оформить заказ
+            </Button>
+          </>
+
+          {order.loading && (
+            <Modal
+              onClose={() => closeModal()}
+              closeOverlay={() => closeModal()}
+            >
+              <div className={styles.wrapper_orders}>
+                <p className={styles.text_loading}>Создание заказа...</p>
+              </div>
+            </Modal>
+          )}
+          {!order.loading && order.error && <div>Ошибка</div>}
+          {!order.loading && order.order !== null && (
+            <Modal
+              onClose={() => closeModal()}
+              closeOverlay={() => closeModal()}
+            >
+              <OrderDetails order={{ order: order.order }} />
+            </Modal>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

@@ -3,15 +3,21 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { BASE_URL } from '../../utils/data'
 import { TIngredient } from '../../utils/types'
 import { ThunkAPI } from '../store'
+import axios from 'axios'
+import { checkResponse } from '../../utils/api'
+interface IResponse {
+  data: {
+    data: TIngredient[]
+    success: true
+  }
+}
 
 export const fetchIngredients = createAsyncThunk(
   'ingredients/fetchIngredients',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch(`${BASE_URL}/ingredients`)
-
-    return response.data.data
-
+      const response = await axios.get(`${BASE_URL}/ingredients`)
+      return response.data.data
     } catch (error) {
       return rejectWithValue((error as { message: string }).message)
     }
