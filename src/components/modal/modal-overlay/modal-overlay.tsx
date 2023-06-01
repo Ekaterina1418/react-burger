@@ -4,7 +4,7 @@ type TypeOverlayProps = {
   close: () => void,
 }
 const ModalOverlay = ({ close }: TypeOverlayProps) :JSX.Element  => {
-  return <div className={styles.modal_overlay} onClick={close}></div>
+  return <div className={styles.modal_overlay} onClick={close} data-test="close-overlay"></div>
 }
 
 export default ModalOverlay

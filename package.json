@@ -31,7 +31,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test:cypress":"cypress open",
+    "cypress": "cypress open cache clear",
     "eject": "react-scripts eject"
   },
   "browserslist": {
@@ -50,7 +50,8 @@
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.1",
     "@types/uuid": "^9.0.1",
-    "cypress": "^12.13.0"
+    "cypress": "^12.13.0",
+    "gh-pages": "^5.0.0"
   },
   "jest": {
     "moduleNameMapper": {

@@ -18,7 +18,10 @@ const OrderDetails = ({ order }: orderProps) => {
   return (
     <div className={styles.burger_checkout_wrapper}>
       <>
-        <p className={`${styles.order_number} text text_type_digits-large`}>
+        <p
+          className={`${styles.order_number} text text_type_digits-large`}
+          data-test={order.order.order.number}
+        >
           {order.order.order.number}
         </p>
         <p className={`${styles.order_text} text text_type_main-medium`}>

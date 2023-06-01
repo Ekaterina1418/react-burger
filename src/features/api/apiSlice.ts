@@ -16,8 +16,9 @@ export const fetchIngredients = createAsyncThunk(
   'ingredients/fetchIngredients',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`${BASE_URL}/ingredients`)
-      return response.data.data
+      const response = await fetch(`${BASE_URL}/ingredients`)
+   const res = await response.json()
+   return res.data
     } catch (error) {
       return rejectWithValue((error as { message: string }).message)
     }

@@ -85,9 +85,8 @@ const BurgerConstructor = () => {
         ref={dropRef}
       >
         <div className={styles.burger_constructor_lists}>
-       
-          {bun && (
-            <div data-test="top_bun">
+          {bun ? (
+            <div data-test={bun.name}>
               <ConstructorElement
                 type="top"
                 isLocked={true}
@@ -97,21 +96,30 @@ const BurgerConstructor = () => {
                 extraClass={styles.wrapper_ingreients}
               />
             </div>
+          ) : (
+            <div className={`${styles.default_bun} ${styles.default_bun_top}`}>
+              <span>Выберете булку</span>
+            </div>
           )}
-          {ingredient &&
-            ingredient.map((item, index: number) => (
-              <div data-test="ingredient" key={item.id}>
-                <BurgerConstructorItem
-                  ingredient={item}
-                  key={item.id}
-                  index={index}
-                  moveCard={handleMoveItem}
-                  handleClose={(item) => dispatch(removeIngredient(item))}
-                />
-              </div>
-            ))}
-          {bun && (
-            <div data-test="bottom_bun">
+          <div className={`${styles.constructor_elements} custom-scroll`}>
+            {ingredient.length > 0 ? (
+              ingredient.map((item, index: number) => (
+                <div data-test={item} key={item.id}>
+                  <BurgerConstructorItem
+                    ingredient={item}
+                    key={item.id}
+                    index={index}
+                    moveCard={handleMoveItem}
+                    handleClose={(item) => dispatch(removeIngredient(item))}
+                  />
+                </div>
+              ))
+            ) : (
+              <div className={styles.default_elements}><span>Выберете начинку</span></div>
+            )}
+          </div>
+          {bun ? (
+            <div data-test={bun.name}>
               <ConstructorElement
                 type="bottom"
                 isLocked={true}
@@ -120,6 +128,12 @@ const BurgerConstructor = () => {
                 thumbnail={bun.image}
                 extraClass={styles.burger_constructor_bottom}
               />
+            </div>
+          ) : (
+            <div
+              className={`${styles.default_bun} ${styles.default_bun_bottom}`}
+            >
+              <span> Выберете булку</span>
             </div>
           )}
         </div>
@@ -134,6 +148,7 @@ const BurgerConstructor = () => {
               htmlType="button"
               type="primary"
               size="large"
+              data-test="order-button"
             >
               Оформить заказ
             </Button>

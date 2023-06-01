@@ -39,7 +39,9 @@ const Modal = ({
           <div className={styles.modal_wrapper} data-test="modal">
             <div className={styles.modal_basic}>
               <h2 className={styles.modal_title}>{title}</h2>
-              <CloseIcon type="primary" onClick={onClose} />
+              <div data-test="button-close">
+                <CloseIcon type="primary" onClick={onClose} />
+              </div>
             </div>
             {children}
           </div>
