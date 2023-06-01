@@ -1,46 +1,35 @@
-# Getting Started with Create React App
+# Космическая бургерная
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Это приложение представляет собой виртуальную бургерную, разработанную с использованием библиотеки React, Redux, React Router и TypeScript.  
 
-## Available Scripts
+Оно предлагает пользователям возможность создавать свои собственные космические бургеры, путем перетаскивания различных ингредиентов на 
+  
+основе  их предпочтений. Приложение покрыто тестами с использованием фреймворков Jest и Cypress, что обеспечивает надежность и проверку 
 
-In the project directory, you can run:
+функциональности.
 
-### `npm start`
+### Возможности
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Создание бургера: Пользователи могут выбирать ингредиенты, такие как булочки, мясо, соусы, и перетаскивать их на область сборки, чтобы  
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+создать уникальный космический бургер.
 
-### `npm test`
+- Оформление заказа: Зарегистрированные пользователи могут оформить заказ.
+- Отслеживание заказов: Зарегистрированные пользователи имеют возможность отслеживать свои заказы и узнавать текущий статус заказа.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Ссылка на проект: [Космческая бургерная](https://ekaterina1418.github.io/react-burger/)
 
-### `npm run build`
+### Установка и запуск 
+ - Убедитесь, что у вас установлен Node.js (версия 12 или выше).
+ - Склонируйте репозиторий с приложением: git clone https://github.com/your/repository.git
+ - Перейдите в каталог с приложением: cd your-repository
+ - Установите зависимости: npm install
+ - Запустите приложение: npm start
+ - Откройте браузер и перейдите по адресу: http://localhost:3000
+ - Тестирование
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Чтобы запустить тесты, выполните следующие команды:
+ - Для запуска модульных тестов с использованием Jest: npm run test
+ - Для запуска интеграционных тестов с использованием Cypress: npm run cypress
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
