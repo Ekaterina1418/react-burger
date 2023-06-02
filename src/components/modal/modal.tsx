@@ -19,7 +19,7 @@ const Modal = ({
   closeOverlay,
 }: TModalProps): JSX.Element => {
   const [close, setClose] = useState<boolean>(true)
-  
+
   const closeModal = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
       setClose(false)
@@ -36,10 +36,12 @@ const Modal = ({
     <>
       {close && (
         <>
-          <div className={styles.modal_wrapper}>
+          <div className={styles.modal_wrapper} data-test="modal">
             <div className={styles.modal_basic}>
               <h2 className={styles.modal_title}>{title}</h2>
-              <CloseIcon type="primary" onClick={onClose} />
+              <div data-test="button-close">
+                <CloseIcon type="primary" onClick={onClose} />
+              </div>
             </div>
             {children}
           </div>

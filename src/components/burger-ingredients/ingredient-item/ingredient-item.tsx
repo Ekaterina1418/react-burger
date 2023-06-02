@@ -38,6 +38,7 @@ const IngredientItem = ({
           to={`/ingredient/${ingredientId}`}
           state={{ background: location }}
           className={styles.link}
+          data-test={ingredient.name}
         >
           <div
             className={`${styles.burger_ingredient_container} ${styles.burger_ingredient_rolls}`}

@@ -8,7 +8,7 @@ export type LiveTableStore = {
   connectingError: string
 }
 
-const initialState: LiveTableStore = {
+export const initialState: LiveTableStore = {
   status: WebsocketStatus.OFFLINE,
   orders: null,
   connectingError: '',

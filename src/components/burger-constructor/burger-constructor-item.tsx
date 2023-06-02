@@ -72,7 +72,7 @@ const BurgerConstructorItem = ({
 
   return (
     <div className={styles.burger_constructor_item} ref={ref}>
-      <DragIcon type="primary" />
+    
       <ConstructorElement
         thumbnail={ingredient.image}
         text={ingredient.name}

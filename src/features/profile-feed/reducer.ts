@@ -14,7 +14,7 @@ export type FeedStore = {
     connectingError: string
 }
 
-const initialState: FeedStore = {
+export  const initialState: FeedStore = {
     status: WebsocketStatus.OFFLINE,
     orders: null,
     connectingError: ''

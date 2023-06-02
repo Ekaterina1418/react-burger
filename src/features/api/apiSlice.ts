@@ -1,17 +1,26 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
 import { BASE_URL } from '../../utils/data'
 import { TIngredient } from '../../utils/types'
+import { ThunkAPI } from '../store'
+import axios from 'axios'
+import { checkResponse } from '../../utils/api'
+interface IResponse {
+  data: {
+    data: TIngredient[]
+    success: true
+  }
+}
 
 export const fetchIngredients = createAsyncThunk(
   'ingredients/fetchIngredients',
-  async (_, thunkAPI) => {
+  async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`${BASE_URL}/ingredients`)
-      return response.data.data
-    } catch (error:any) {
-      return thunkAPI.rejectWithValue(error.message)
+      const response = await fetch(`${BASE_URL}/ingredients`)
+   const res = await response.json()
+   return res.data
+    } catch (error) {
+      return rejectWithValue((error as { message: string }).message)
     }
   }
 )
@@ -20,7 +29,7 @@ export interface ApiState {
   ingredients: TIngredient[]
   error: string | null
 }
-const initialState:ApiState = {
+export const initialState: ApiState = {
   loading: false,
   ingredients: [],
   error: null,
@@ -29,7 +38,7 @@ const initialState:ApiState = {
 const apiSlice = createSlice({
   name: 'ingredients',
   initialState,
-  reducers:{},
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchIngredients.pending, (state) => {
       state.loading = true
@@ -43,11 +52,14 @@ const apiSlice = createSlice({
         state.error = null
       }
     )
-    builder.addCase(fetchIngredients.rejected, (state, action: PayloadAction<any>) => {
-      state.loading = false
-      state.ingredients = []
-      state.error = action.payload
-    })
+    builder.addCase(
+      fetchIngredients.rejected,
+      (state, action: PayloadAction<any>) => {
+        state.loading = false
+        state.ingredients = []
+        state.error = action.payload
+      }
+    )
   },
 })
 export default apiSlice.reducer

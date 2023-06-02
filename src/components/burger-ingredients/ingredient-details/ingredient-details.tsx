@@ -22,7 +22,7 @@ const IngredientDetails = () => {
   return (
     <>
       {!loading && ingredient && (
-        <div className={styles.details_wrapper}>
+        <div className={styles.details_wrapper} data-test="details_ingredient">
           <img src={ingredient.image} alt={ingredient.name} />
           <h3 className={`${styles.details_name} text text_type_main-medium`}>
             {ingredient.name}
